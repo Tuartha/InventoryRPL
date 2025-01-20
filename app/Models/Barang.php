@@ -12,11 +12,20 @@ class Barang extends Model
     protected $fillable = [
         "Kode_Barang",
         "Nama_Barang",
-        "Letak_Barang",
+        "Merk",
+        "Tahun_Datang",
         "Kondisi_Barang",
         "Stock",
         "slug"
     ];
+
+    public function lokasi() {
+        return $this->belongsTo(Lokasi::class);
+    }
+
+    public function peminjaman() {
+        return $this->belongsTo(Peminjaman::class);
+    }
 
     protected static function boot() {
         parent::boot();

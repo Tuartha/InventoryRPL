@@ -9,14 +9,14 @@
             </a>
             <ul class="mt-4">
                 <li class="mb-1 group active">
-                    <a href="#"
+                    <a href="/"
                         class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                         <i class="mr-2 text-xl ph ph-list-dashes"></i>
                         <span class="text-sm">Dashboard</span>
                     </a>
                 </li>
                 <li class="mb-1 group">
-                    <a href="#"
+                    <a href="/aku"
                         class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                         <i class="mr-2 text-xl ph ph-toolbox"></i>
                         <span class="text-sm">Data Alat</span>
@@ -36,7 +36,7 @@
         </div>
         <div class="fixed top-0 left-0 z-40 w-full h-full bg-black/50 md:hidden sidebar-overlay"></div>
     
-        <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
+        <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main overflow-hidden">
             <div class="sticky top-0 left-0 z-30 flex items-center px-6 py-2 bg-white shadow-md shadow-black/5">
                 <button type="button" class="text-lg text-gray-600 sidebar-toggle">
                     <i class="ph ph-list"></i>
@@ -118,5 +118,4 @@
         </main>
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="dist/js/script.js"></script>
 </x-headerfooter>
