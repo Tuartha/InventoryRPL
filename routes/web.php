@@ -23,14 +23,23 @@ Route::get('/', function () {
 Route::get('/index', function () {
     return view('index');
 });
+Route::get('/peminjaman', function () {
+    return view('peminjaman');
+});
+
+Route::get('/pengembalian', function () {
+    return view('pengembalian');
+});
+
+
 Route::post('/getLokasiName', [LokasiController::class, 'getLokasiName'])->name('getLokasiName');
 
 Route::get('/inventori', [BarangController::class, 'loadAll']);
 // Route::get('/inventori/add/barang', [BarangController::class, 'loadAddForm']);
 Route::post('/inventori/add/barang', [BarangController::class, 'addForm'])->name('addBarang');
-Route::get('/update/barang', [BarangController::class, 'loadEditForm']);
-Route::post('/update/{slug}', [BarangController::class, 'editForm'])->name('editBarang');
-Route::get('/delete/{slug}', [BarangController::class, 'deleteBarang']);
+// Route::get('/update/barang', [BarangController::class, 'loadEditForm']);
+Route::post('/inventori/update/barang', [BarangController::class, 'editForm'])->name('editBarang');
+Route::post('/inventori/delete/barang', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

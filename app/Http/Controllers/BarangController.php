@@ -15,10 +15,6 @@ class BarangController extends Controller
         return view('/inventori', compact(['all', 'lokasis']));
     }
 
-    // public function loadAddForm() {
-    //     return view('/inventori');
-    // }
-
     public function addForm(Request $request) {
         $request->validate([
             "nama_barang" => "required|string",
@@ -40,55 +36,70 @@ class BarangController extends Controller
             $newBarang->slug = $slug;
             $newBarang->save();
 
-            return redirect("/inventori")->with("success", "Barang Berhasil Ditambahkan");
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Barang berhasil ditambahkan!'
+            ]);
         } catch (\Exception $e) {
-            return redirect("/index")->with("fail", $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan saat menambahkan barang: ' . $e->getMessage()
+            ], 500);
         }
-    }
-
-    public function loadEditForm($slug) {
-        $brg = Barang::find($slug);
-        if (!$brg) {
-            return redirect('/')->with('fail', 'Barang tidak ditemukan!');
-        }
-        return view("/editForm", compact('brg'));
     }
 
     public function editForm(Request $request) {
         $request->validate([
-            "nama_barang" => "required|string",
-            "merk" => "required|string",
-            "tahun_datang" => "required|string",
-            "lokasi_id" => "required",
-            "stock" => "required|integer"
+            "up_nama_barang" => "required|string",
+            "up_merk" => "required|string",
+            "up_tahun_datang" => "required|string",
+            "up_lokasi_id" => "required|exists:lokasis,id",
+            "up_stock" => "required|integer"
         ]);
 
         try {
-            $updateBarang = Barang::find($request->slug);
+            $updateBarang = Barang::where('slug', $request->up_slug)->first();
             if($updateBarang){
                 $updateBarang->update([
-                    "nama_barang" => $request->nama_barang,
-                    "merk" => $request->merk,
-                    "tahun_datang" => $request->tahun_datang,
-                    "lokasi_id" => $request->lokasi_id,
-                    "stock" => $request->stock,
-                    "slug" => Str::slug($request->nama_barang, '-'),
+                    "nama_barang" => $request->up_nama_barang,
+                    "merk" => $request->up_merk,
+                    "tahun_datang" => $request->up_tahun_datang,
+                    "lokasi_id" => $request->up_lokasi_id,
+                    "stock" => $request->up_stock,
+                    "slug" => Str::slug($request->up_nama_barang . '-' . time()),
                 ]);
-                return redirect('/')->with('success', $updateBarang->nama_barang . "Berhasil Diubah");
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $updateBarang->nama_barang . ' berhasil diubah!'
+                ]);
             } else {
-                return redirect('/editForm')->with('fail', "Barang Tidak Ditemukan!");
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'Barang tidak ditemukan!'
+                ], 404);
             }
         } catch (\Exception $e) {
-            return redirect("/")->with("fail", $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan saat mengupdate barang: ' . $e->getMessage()
+            ], 500);
         }
     }
 
-    public function deleteBarang($slug) {
-        try {
-            Barang::where('slug', $slug)->delete();
-            return redirect("/")->with("success", "Barang Berhasil Dihapus");
-        } catch (\Exception $e) {
-            return redirect("/")->with("fail", $e->getMessage());
+    public function deleteBarang(Request $request) {
+        // Ambil slug barang dari request
+        $slug = $request->input('barang_slug');
+
+        // Cari barang berdasarkan slug
+        $barang = Barang::where('slug', $slug)->first();
+
+        if (!$barang) {
+            return response()->json(['message' => 'Barang tidak ditemukan'], 404);
         }
+
+        // Hapus barang dari database
+        $barang->delete();
+
+        return response()->json(['message' => 'Barang berhasil dihapus']);
     }
 }

@@ -3,7 +3,7 @@
         class="fixed top-0 left-0 z-50 flex flex-col justify-between w-64 h-full p-4 transition-transform bg-gray-900 sidebar-menu">
         <!-- Profil User -->
             <a href="#" class="flex flex-col items-start justify-center pb-4 border-b border-b-gray-500">
-                <img src="img/userimage.jpg" alt="" class="flex object-cover ml-2 rounded-full h-14 w-14">
+                <img src="" alt="" class="flex object-cover ml-2 rounded-full h-14 w-14">
                 <span class="mt-1 font-bold text-white text-md">Rama Sigma</span>
                 <p class="text-xs text-white ">sigmaboy@gmail.com</p>
             </a>
@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li class="mb-1 group active">
-                    <a href="/inventori.html"
+                    <a href="/inventori"
                         class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
                         <i class="mr-2 text-xl ph ph-archive"></i>
                         <span class="text-sm">Inventori</span>
@@ -26,7 +26,7 @@
     
                 </li>
                 <li class="mb-1 group">
-                    <a href="/peminjaman.html"
+                    <a href="/peminjaman"
                         class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
                         <i class="mr-2 text-xl ph ph-hand-arrow-down"></i>
                         <span class="text-sm">Peminjaman</span>
@@ -35,7 +35,7 @@
     
                 </li>
                 <li class="mb-1 group">
-                    <a href="/pengembalian.html"
+                    <a href="/pengembalian"
                         class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
                         <i class="mr-2 text-lg ph ph-hand-arrow-up"></i>
                         <span class="text-sm">Pengembalian</span>
@@ -73,7 +73,7 @@
                     <ul class="flex items-center ml-auto">
                         <li class="ml-3 dropdown">
                             <button type="button" class="flex items-center dropdown-toggle">
-                                <img src="img/userimage.jpg" alt="" class="block object-cover w-8 h-8 align-middle rounded">
+                                <img src="" alt="" class="block object-cover w-8 h-8 align-middle rounded">
                             </button>
                             <ul
                                 class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
@@ -151,8 +151,22 @@
                                                 {{ $barang->stock }}
                                             </td>
                                             <td class="px-6 py-4 text-right flex lg:gap-10 md:gap-16 justify-center items-center">
-                                                <a href="#" class="font-medium text-blue-600 hover:underline flex items-center" data-modal-target="crud-edit" data-modal-toggle="crud-edit"><i class="mr-2 text-xl ph ph-pencil-simple "></i>Edit</a>
-                                                <a href="#" class="font-medium text-red-600 hover:underline flex items-center" data-modal-target="popup-modal" data-modal-toggle="popup-modal"><i class="mr-2 text-xl ph ph-trash "></i>Hapus</a>  
+                                                <a href="#" class="updateBarangForm font-medium text-blue-600 hover:underline flex items-center" 
+                                                    data-modal-target="crud-edit" 
+                                                    data-modal-toggle="crud-edit" 
+                                                    data-slug="{{ $barang->slug }}" 
+                                                    data-nama_barang="{{ $barang->nama_barang }}" 
+                                                    data-merk="{{ $barang->merk }}" 
+                                                    data-tahun_datang="{{ $barang->tahun_datang }}" 
+                                                    data-lokasi="{{ $barang->lokasi->id }}"
+                                                    data-stock="{{ $barang->stock }}">
+                                                    <i class="mr-2 text-xl ph ph-pencil-simple"></i>Edit
+                                                </a> 
+                                                <a href="#" class="hapusBarang font-medium text-red-600 hover:underline flex items-center" 
+                                                    data-modal-target="popup-modal" 
+                                                    data-modal-toggle="popup-modal"
+                                                    data-slug="{{ $barang->slug }}"
+                                                ><i class="mr-2 text-xl ph ph-trash "></i>Hapus</a>  
                                             </td>
                                         </tr> 
                                     @endforeach
@@ -215,202 +229,11 @@
     
                 </div> --}}
             </div>
-    
-    
-        </main>
-    <!-- Modal Tambah -->
-    {{-- <div id="crud-tambah" tabindex="-1" aria-hidden="true"
-    class="hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full">
-        <div class="relative w-full max-w-md p-4">
-            <div class="relative bg-white rounded-lg shadow">
-                <!-- Modal Header -->
-                <div class="flex items-center justify-between p-4 border-b rounded-t">
-                    <h3 class="text-lg font-semibold text-gray-900">Tambah Barang</h3>
-                    <button type="button" data-modal-toggle="crud-tambah"
-                        class="inline-flex items-center justify-center w-8 h-8 text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Form -->
-                <form id="addBarangForm" class="p-4" method="POST" action="{{ route('addBarang') }}">
-                    @csrf
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div class="col-span-2">
-                            <label for="nama_barang" class="block mb-2 text-sm font-medium text-gray-900">Nama Barang</label>
-                            <input type="text" name="nama_barang" id="nama_barang" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Masukkan nama barang">
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="merk" class="block mb-2 text-sm font-medium text-gray-900">Merk</label>
-                            <input type="text" name="merk" id="merk" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Masukkan merk barang">
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="lokasi_id" class="block mb-2 text-sm font-medium text-gray-900">Lokasi Barang</label>
-                            <select id="lokasi_id" name="lokasi_id" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                                <option value="">Pilih</option>
-                                <option value="RPL1">Lab RPL 1</option>
-                                <option value="RPL2">Lab RPL 2</option>
-                                <option value="RPL3">Lab RPL 3</option>
-                                <option value="RGRPL">Ruang Guru RPL</option>
-                            </select>
-                        </div>
-
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="tahun_datang" class="block mb-2 text-sm font-medium text-gray-900">Tahun Masuk</label>
-                            <select id="tahun_datang" name="tahun_datang" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                            </select>
-                        </div>
-
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">Stok Barang</label>
-                            <input type="number" name="stock" id="stock" required
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Masukkan stok barang">
-                        </div>
-                    </div>
-
-                    <button type="submit"
-                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 w-full">
-                        Tambah Barang
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-        <!-- Modal Delete -->
-        <div id="popup-modal" tabindex="-1"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative w-full max-w-md max-h-full p-4">
-                <div class="relative bg-white rounded-lg shadow ">
-                    <button type="button"
-                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                        data-modal-hide="popup-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="p-4 md:p-5">
-                        <svg class="w-12 h-12 mx-auto mb-4 text-gray-400 " aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        <h3 class="text-lg font-bold text-black ">Apakah Anda yakin ingin menghapus barang ini?</h3>
-                        <p class="text-[14px] text-black/80 "></p>Ini akan menghapus barang secara permanen dan tidak dapat
-                        dikembalikan</p>
-                        <div class="flex justify-center pt-5">
-                            <button data-modal-hide="popup-modal" type="button"
-                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-7 py-2.5 text-center">
-                                Hapus
-                            </button>
-                            <button data-modal-hide="popup-modal" type="button"
-                                class="py-2.5 px-7 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Batal</button>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal edit -->
-        <div id="crud-edit" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative w-full max-w-md max-h-full p-4">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow ">
-                    <!-- Modal header -->
-                    <div class="flex items-center justify-between p-4 border-b rounded-t md:p-5 ">
-                        <h3 class="text-lg font-semibold text-gray-900 ">
-                            Edit Barang
-                        </h3>
-                        <button type="button"
-                            class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto "
-                            data-modal-toggle="crud-edit">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <form class="p-4 md:p-5">
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div class="col-span-2">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nama Barang</label>
-                                <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                    placeholder="Masukan nama barang" required="">
-                            </div>
-                            <div class="col-span-2">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Merk</label>
-                                <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                    placeholder="Masukan merk barang" required="">
-                            </div>
-                            <div class="col-span-2">
-                                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 ">Lokasi
-                                    Barang</label>
-                                <select id="category"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
-                                    <option selected="">Pilih</option>
-                                    <option value="RPL1">Lab RPL 1</option>
-                                    <option value="RPL2">Lab RPL 2</option>
-                                    <option value="RPL3">Lab RPL 3</option>
-                                    <option value="RGRPL">Ruang Guru RPL</option>
-                                </select>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Tahun Masuk</label>
-                                <select id="yearPicker"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <!-- Tambahkan lebih banyak tahun -->
-                                </select>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Stok Barang</label>
-                                <input type="text" name="name" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                    placeholder="Masukan stok barang" required="">
-                            </div>
-                        
-                        </div>
-                        <button type="submit"
-                            class="text-white inline-flex items-center justify-center uppercase bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-green font-medium rounded-lg text-sm px-5 py-2.5 w-full text-center ">
-                            <i class="mr-1 text-lg ph ph-pencil-simple-line"></i>
-                            Simpan
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-        <script src="app.js"></script>
         @include('profile/partials/add_form')
+        @include('profile/partials/edit_form')
+        @include('profile/partials/delete_form')
+    
+    </main>
         <script>
             $.ajaxSetup({
                 headers: {
@@ -462,14 +285,99 @@
                             merk: merk,
                             lokasi_id: lokasi_id,
                             stock: stock,
-                            tahun: tahun,
+                            tahun_datang: tahun,
                             _token: "{{ csrf_token() }}" // Jangan lupa menambahkan CSRF token
                         },
                         success: function(response) {
-                            // Lakukan sesuatu setelah berhasil menambah barang, misalnya reset form atau tampilkan pesan sukses
+                            if (response.status === 'success') {
+                                alert(response.message);
+                                location.reload();
+                            } else {
+                                alert(response.message);
+                            }
                         },
                         error: function(xhr) {
-                            alert('Terjadi kesalahan dalam menambahkan barang');
+                            let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menambahkan barang';
+                            alert(errorMessage); 
+                        }
+                    });
+                });
+
+                $(document).on('click', '.updateBarangForm', function() {
+                    let slug = $(this).data('slug');
+                    let nama_barang = $(this).data('nama_barang');
+                    let merk = $(this).data('merk');
+                    let lokasi = $(this).data('lokasi');
+                    let tahun_datang = $(this).data('tahun_datang');
+                    let stock = $(this).data('stock');
+
+                    $('#up_slug').val(slug);
+                    $('#up_nama_barang').val(nama_barang);
+                    $('#up_merk').val(merk);
+                    $('#up_lokasi_id').val(lokasi);
+                    $('#up_tahun_datang').val(tahun_datang);
+                    $('#up_stock').val(stock);
+                });
+
+                $(document).on('click', '.updateBarang', function(e) {
+                    e.preventDefault();
+                    let up_slug = $('#up_slug').val();
+                    let up_nama_barang = $('#up_nama_barang').val();
+                    let up_merk = $('#up_merk').val();
+                    let up_lokasi_id = $('#up_lokasi_id').val();
+                    let up_stock = $('#up_stock').val();
+                    let up_tahun = $('#up_tahun_datang').val();
+        
+                    $.ajax({
+                        url: "{{ route('editBarang') }}",
+                        method: 'post',
+                        data: {
+                            up_slug: up_slug,
+                            up_nama_barang: up_nama_barang,
+                            up_merk: up_merk,
+                            up_lokasi_id: up_lokasi_id,
+                            up_stock: up_stock,
+                            up_tahun_datang: up_tahun,
+                            _token: "{{ csrf_token() }}" 
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                location.reload();
+                                alert(response.message);
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menambahkan barang';
+                            alert(errorMessage); // Tampilkan pesan error
+                        }
+                    });
+                });
+
+                let barangSlug = ''; // Variabel untuk menyimpan slug barang
+                $(document).on('click', '.hapusBarang', function(e) {
+                    e.preventDefault();
+                    barangSlug = $(this).data('slug'); // Ambil slug dari tombol yang diklik
+                });
+
+                // Saat tombol "Hapus" di modal diklik, lakukan AJAX request
+                $('.hapusBtn').on('click', function() {
+                    $.ajax({
+                        url: "{{ route('deleteBarang') }}",
+                        method: "POST",
+                        data: {
+                            barang_slug: barangSlug,
+                            _token: "{{ csrf_token() }}" 
+                        },
+                        success: function(response) {
+                            alert(response.message); // Tampilkan notifikasi
+                            $('tr[data-slug="'+barangSlug+'"]').remove(); // Hapus baris dari tabel
+                            location.reload();
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus barang';
+                            alert(errorMessage);
                         }
                     });
                 });
