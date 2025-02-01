@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('barangs_id');
             $table->unsignedBigInteger('users_id');
             $table->string('status');
-            $table->timestamps('tanggal_pinjam');
-            $table->timestamps('tanggal_kembali');
+            $table->timestamp('tanggal_pinjam');
+            $table->timestamp('tanggal_kembali');
 
             $table->foreign('barangs_id')->references('id')->on('barangs')->onDelete('cascade');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

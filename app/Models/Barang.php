@@ -9,13 +9,13 @@ use Illuminate\Support\Str;
 class Barang extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
-        "Kode_Barang",
-        "Nama_Barang",
-        "Merk",
-        "Tahun_Datang",
-        "Kondisi_Barang",
-        "Stock",
+        "nama_barang",
+        "merk",
+        "lokasi_id",
+        "tahun_datang",
+        "stock",
         "slug"
     ];
 
@@ -29,9 +29,8 @@ class Barang extends Model
 
     protected static function boot() {
         parent::boot();
-
-        static::saving(function ($barang) {
-            $barang->slug = Str::slug($barang->Nama_Barang, '-');
+        static::creating(function ($barang) {
+            $barang->slug = Str::slug($barang->nama_barang . '-' . time());
         });
     }
 }
