@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PeminjamanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,27 +21,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/index', function () {
-    return view('index');
+Route::get('/index', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
+Route::get('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman');
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+    Route::get('/pengembalian', [PeminjamanController::class, 'index'])->name('pengembalian');
 });
-Route::get('/peminjaman', function () {
-    return view('peminjaman');
-});
-
-Route::get('/pengembalian', function () {
-    return view('pengembalian');
-});
+Route::get('/laporan', function () {
+    return view('laporan');
+})->name('laporan');
 
 
 Route::post('/getLokasiName', [LokasiController::class, 'getLokasiName'])->name('getLokasiName');
 
-Route::get('/inventori', [BarangController::class, 'loadAll']);
+Route::get('/inventori', [BarangController::class, 'loadAll'])->name('inventori');
 // Route::get('/inventori/add/barang', [BarangController::class, 'loadAddForm']);
-Route::post('/inventori/add/barang', [BarangController::class, 'addForm'])->name('addBarang');
+Route::post('/inventori/add', [BarangController::class, 'addForm'])->name('addBarang');
 // Route::get('/update/barang', [BarangController::class, 'loadEditForm']);
-Route::post('/inventori/update/barang', [BarangController::class, 'editForm'])->name('editBarang');
-Route::post('/inventori/delete/barang', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
+Route::post('/inventori/update', [BarangController::class, 'editForm'])->name('editBarang');
+Route::post('/inventori/delete', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -27,6 +27,10 @@ class User extends Authenticatable
         'nis',
     ];
 
+    public function peminjaman() {
+        return $this->hasMany(Peminjaman::class, 'users_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

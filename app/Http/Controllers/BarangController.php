@@ -70,7 +70,7 @@ class BarangController extends Controller
                 ]);
                 return response()->json([
                     'status' => 'success',
-                    'message' => $updateBarang->nama_barang . ' berhasil diubah!'
+                    'message' => $updateBarang->up_nama_barang . ' berhasil diubah!'
                 ]);
             } else {
                 return response()->json([

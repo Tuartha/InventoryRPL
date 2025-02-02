@@ -46,6 +46,18 @@
                 </div>
             @endif
         </div>
+        
+        <div>
+            <x-input-label for="kelas" :value="__('Kelas')" />
+            <x-text-input id="kelas" name="kelas" type="text" class="mt-1 block w-full" :value="old('kelas', $user->kelas)" required autocomplete="kelas" />
+            <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
+        </div>
+        
+        <div>
+            <x-input-label for="nis" :value="__('NIS')" />
+            <x-text-input id="nis" name="nis" type="text" class="mt-1 block w-full" :value="old('nis', $user->nis)" required autocomplete="nis" />
+            <x-input-error class="mt-2" :messages="$errors->get('nis')" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

@@ -1,103 +1,11 @@
-<x-headerfooter>
-    <div
-        class="fixed top-0 left-0 z-50 flex flex-col justify-between w-64 h-full p-4 transition-transform bg-gray-900 sidebar-menu">
-        <!-- Profil User -->
-            <a href="#" class="flex flex-col items-start justify-center pb-4 border-b border-b-gray-500">
-                <img src="" alt="" class="flex object-cover ml-2 rounded-full h-14 w-14">
-                <span class="mt-1 font-bold text-white text-md">Rama Sigma</span>
-                <p class="text-xs text-white ">sigmaboy@gmail.com</p>
-            </a>
-            <!-- Menu Utama -->
-            <ul class="flex-grow mt-4">
-                <li class="mb-1 group ">
-                    <a href="/index"
-                        class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                        <i class="mr-2 text-xl ph ph-sidebar"></i>
-                        <span class="text-sm">Dashboard</span>
-                    </a>
-                </li>
-                <li class="mb-1 group active">
-                    <a href="/inventori"
-                        class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
-                        <i class="mr-2 text-xl ph ph-archive"></i>
-                        <span class="text-sm">Inventori</span>
-                        <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                    </a>
-    
-                </li>
-                <li class="mb-1 group">
-                    <a href="/peminjaman"
-                        class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
-                        <i class="mr-2 text-xl ph ph-hand-arrow-down"></i>
-                        <span class="text-sm">Peminjaman</span>
-                        <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                    </a>
-    
-                </li>
-                <li class="mb-1 group">
-                    <a href="/pengembalian"
-                        class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
-                        <i class="mr-2 text-lg ph ph-hand-arrow-up"></i>
-                        <span class="text-sm">Pengembalian</span>
-                    </a>
-                </li>
-                <li class="mb-1 group">
-                    <a href="/laporan.html"
-                        class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 ">
-                        <i class="mr-2 text-lg ph ph-notepad"></i>
-                        <span class="text-sm">Laporan</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="mt-auto">
-                <a href="/login.html"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class="mr-2 text-lg ph ph-sign-out"></i>
-                    <span class="text-sm"> Log out</span>
-                </a>
-            </div>
-        </div>
-        <div class="fixed top-0 left-0 z-40 w-full h-full bg-black/50 md:hidden sidebar-overlay"></div>
-    
-        <main class="w-full md:w-[calc(100%-256px)] md:ml-64  min-h-screen transition-all main">
-            <div class="bg-[#00ADB5] h-[50vh]">
-                <div class="sticky top-0 left-0 z-30 flex items-center px-6 py-2 bg-white shadow-md shadow-black/5">
-                    <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-                        <i class="ph ph-list"></i>
-                    </button>
-                    <ul class="flex items-center ml-4 text-sm">
-                        <li class="mr-2">
-                            <a href="#" class="font-medium text-gray-400 hover:text-gray-600">Inventori</a>
-                        </li>
-                    </ul>
-                    <ul class="flex items-center ml-auto">
-                        <li class="ml-3 dropdown">
-                            <button type="button" class="flex items-center dropdown-toggle">
-                                <img src="" alt="" class="block object-cover w-8 h-8 align-middle rounded">
-                            </button>
-                            <ul
-                                class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+<x-app-layout>
                 <div class="container px-4 md:px-20 ">
-    
                     <div class="mt-16 mb-10 ">
                         <p class="text-white">Selamat Datang di,</p>
                         <h1 class="text-3xl font-bold text-white">Inventori Barang di Laboratorium RPL SMKN 1 Denpasar</h1>
                     </div>
                     <button type="button" data-modal-target="crud-tambah" data-modal-toggle="crud-tambah"
-                    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><i
-                        class="font-bold ph ph-plus"></i> Barang
+                    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><i class="font-bold ph ph-plus"></i> Barang
                     baru</button>
                     <div class="relative z-10 flex justify-center overflow-x-auto top-5">
                         <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
@@ -228,12 +136,9 @@
                     </nav>
     
                 </div> --}}
-            </div>
         @include('profile/partials/add_form')
         @include('profile/partials/edit_form')
         @include('profile/partials/delete_form')
-    
-    </main>
         <script>
             $.ajaxSetup({
                 headers: {
@@ -269,7 +174,7 @@
                     }
                 });
         
-                $(document).on('click', '.addBarang', function(e) {
+                $(document).on('submit', '#addBarangForm', function(e) {
                     e.preventDefault();
                     let nama_barang = $('#nama_barang').val();
                     let merk = $('#merk').val();
@@ -290,8 +195,8 @@
                         },
                         success: function(response) {
                             if (response.status === 'success') {
-                                alert(response.message);
                                 location.reload();
+                                alert(response.message);
                             } else {
                                 alert(response.message);
                             }
@@ -372,8 +277,8 @@
                         },
                         success: function(response) {
                             alert(response.message); // Tampilkan notifikasi
-                            $('tr[data-slug="'+barangSlug+'"]').remove(); // Hapus baris dari tabel
                             location.reload();
+                            $('tr[data-slug="'+barangSlug+'"]').remove(); // Hapus baris dari tabel
                         },
                         error: function(xhr) {
                             let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus barang';
@@ -383,4 +288,4 @@
                 });
             });
         </script>        
-</x-headerfooter>
+</x-app-layout>

@@ -24,7 +24,7 @@ class Barang extends Model
     }
 
     public function peminjaman() {
-        return $this->belongsTo(Peminjaman::class);
+        return $this->hasMany(Peminjaman::class, 'barangs_id');
     }
 
     protected static function boot() {
