@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PeminjamanController;
@@ -21,15 +22,14 @@ use App\Http\Controllers\PeminjamanController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/index', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman');
 Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
     Route::get('/pengembalian', [PeminjamanController::class, 'index'])->name('pengembalian');
+    Route::post('/pengembalian/{id}', [PeminjamanController::class, 'kembalikan'])->name('pengembalian.update');
 });
-Route::get('/laporan', function () {
-    return view('laporan');
-})->name('laporan');
+Route::get('/laporan', [PeminjamanController::class, 'sKembali'])->name('laporan');
 
 
 Route::post('/getLokasiName', [LokasiController::class, 'getLokasiName'])->name('getLokasiName');
@@ -41,9 +41,9 @@ Route::post('/inventori/add', [BarangController::class, 'addForm'])->name('addBa
 Route::post('/inventori/update', [BarangController::class, 'editForm'])->name('editBarang');
 Route::post('/inventori/delete', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Barang;
+use App\Models\Laporan;
 use App\Models\Peminjaman;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
     public function index() {
-        $pengembalian = Peminjaman::all();
+        $pengembalian = Peminjaman::where('status', 'dipinjam')->get();
         return view('pengembalian', compact('pengembalian'));
+    }
+
+    public function sKembali() {
+        $laporans = Peminjaman::where('status', 'dikembalikan')->get();
+        return view('laporan', compact('laporans'));
     }
 
     public function create() {
@@ -47,5 +53,36 @@ class PeminjamanController extends Controller
         $peminjaman->tanggal_pinjam = Carbon::now();
         $peminjaman->save();
         return redirect()->route('pengembalian')->with('success', 'Peminjaman berhasil ditambahkan.');
+    }
+
+    public function kembalikan($id) {
+        try {
+            $peminjaman = Peminjaman::findOrFail($id);
+    
+            // Pastikan status masih "dipinjam" (huruf kecil)
+            if ($peminjaman->status !== "dipinjam") {
+                return response()->json(['error' => 'Barang sudah dikembalikan sebelumnya!'], 400);
+            }
+    
+            // Tambah stok barang kembali
+            $barang = $peminjaman->barang;
+            $barang->stock += $peminjaman->jumlah;
+            $barang->save();
+    
+            // Ubah status peminjaman menjadi "dikembalikan"
+            $peminjaman->status = "dikembalikan";
+            $peminjaman->tanggal_kembali = Carbon::now();
+            $peminjaman->save();
+
+            // $laporan = new Laporan;
+            // $laporan->peminjaman_id = $peminjaman->id;
+            // $laporan->tanggal_kembali = Carbon::now();
+            // dd($laporan);
+            // $laporan->save();
+    
+            return response()->json(['message' => 'Barang berhasil dikembalikan'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat mengembalikan barang.'], 500);
+        }
     }
 }

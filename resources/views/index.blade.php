@@ -1,17 +1,17 @@
 <x-app-layout>
         <div class="container px-7">
-            <div class="mt-10 mb-10 ml-8">
+            <div class="mt-10 mb-10 px-6">
                 <p class="text-white">Selamat Datang {{ Auth::user()->name }} di,</p>
                 <h1 class="text-2xl font-bold text-white md:text-3xl">
                     Inventori Barang di Laboratorium RPL SMKN 1 Denpasar
                 </h1>
             </div>
             <div
-                class="container relative flex flex-col justify-center gap-4 md:flex-row md:gap-6 lg:gap-24 top-10">
+                class="container relative flex flex-col justify-center gap-10 md:flex-row lg:gap-24 top-10">
                 <div
                     class="flex flex-col items-start justify-start w-full h-40 py-5 px-6 bg-white rounded-xl drop-shadow-md md:w-[26%] hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400 transition duration-300 ease-in-out">
                     <div class="flex w-full items-center justify-between">
-                        <p class="text-black/80">Total Barang</p>
+                        <p class="text-black/80">Total Barang Tersedia</p>
                         <i class="text-5xl px-2 py-1 text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-toolbox md:text-2xl"></i>
                     </div>
                     <div class="flex items-center">
@@ -35,13 +35,13 @@
                         <i class="text-5xl px-2 py-1 text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-up md:text-2xl"></i>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-xl font-bold text-black/80 md:text-4xl">20</span>
+                        <span class="text-xl font-bold text-black/80 md:text-4xl">{{ $pengembalian }}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="relative flex justify-center mt-20 overflow-x-auto  ">
-            <table class="text-sm text-left text-gray-500 w-[89%] rtl:text-right ">
+            <table class="text-sm text-left text-gray-500 lg:w-[89%] w-[95%] rtl:text-right ">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white rtl:text-right ">
                     Barang dipinjam
                     <p class="mt-1 text-sm font-normal text-gray-500 ">Data peminjaman barang laboratorium RPL per hari ini.</p>
@@ -52,10 +52,13 @@
                             NO
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            PEMINJAM
+                            KELAS PEMINJAM
                         </th>
                         <th scope="col" class="px-6 py-3">
                             BARANG
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            MERK
                         </th>
                         <th scope="col" class="px-6 py-3">
                             JUMLAH
@@ -64,22 +67,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b hover:bg-gray-100 ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            1
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            2
-                        </td>
-
-                    </tr>
-
+                    @foreach ($totalPeminjaman as $pinjamToday)
+                        <tr class="bg-white border-b hover:bg-gray-100 ">
+                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                {{ $loop->iteration }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $pinjamToday->user->kelas }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $pinjamToday->barang->nama_barang }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $pinjamToday->barang->merk }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $pinjamToday->jumlah }}
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 

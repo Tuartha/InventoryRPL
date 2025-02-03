@@ -10,6 +10,13 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        tailwindcss(),
     ],
+    server: {
+        host: 'localhost',
+        port: 5173,
+        cors: {
+            origin: 'http://inventory.test',
+            credentials: true,
+        },
+    },
 });

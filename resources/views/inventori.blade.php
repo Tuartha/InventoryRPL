@@ -5,12 +5,12 @@
                         <h1 class="text-3xl font-bold text-white">Inventori Barang di Laboratorium RPL SMKN 1 Denpasar</h1>
                     </div>
                     <button type="button" data-modal-target="crud-tambah" data-modal-toggle="crud-tambah"
-                    class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><i class="font-bold ph ph-plus"></i> Barang
+                    class=" text-white bg-[#222831] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><i class="font-bold ph ph-plus"></i> Barang
                     baru</button>
                     <div class="relative z-10 flex justify-center overflow-x-auto top-5">
                         <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
     
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                            <thead class="text-sm text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
                                         No
