@@ -1,92 +1,78 @@
 <x-app-layout>
-                <div class="container px-4 md:px-20 ">
-                    <div class="mt-16 mb-10 ">
-                        <p class="text-white">Selamat Datang di,</p>
-                        <h1 class="text-3xl font-bold text-white">Inventori Barang di Laboratorium RPL SMKN 1 Denpasar</h1>
-                    </div>
-                    <button type="button" data-modal-target="crud-tambah" data-modal-toggle="crud-tambah"
-                    class=" text-white bg-[#222831] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><i class="font-bold ph ph-plus"></i> Barang
-                    baru</button>
-                    <div class="relative z-10 flex justify-center overflow-x-auto top-5">
-                        <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
+    <div class="container lg:w-[100%] md:w-[87%]">
+        <div class="pt-16 pb-8 lg:px-20 md:px-[2.5rem]">
+            <h1 class="text-3xl font-bold text-white">Inventori Barang di Laboratorium RPL SMKN 1 Denpasar</h1>
+        </div>
     
-                            <thead class="text-sm text-gray-700 uppercase bg-gray-50 ">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        No
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Barang
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Merek
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Tahun Masuk
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Asal
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Stok
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center">
-                                        Aksi
-                                    </th>
+        <!-- Tombol "Barang Baru" hanya untuk admin -->
+        @if(auth()->user()->user_type == 'admin')
+            <button type="button" data-modal-target="crud-tambah" data-modal-toggle="crud-tambah"
+                class="flex items-center justify-center gap-2 md:mx-[2.5rem] lg:mx-20 text-white bg-[#222831] hover:bg-opacity-85 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
+                <i class="font-bold ph ph-plus"></i> Barang baru
+            </button>
+        @endif
     
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (count($all) > 0)
-                                    @foreach ($all as $barang)
-                                        <tr class="bg-white border-b hover:bg-gray-100">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                                {{ $loop->iteration }}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {{ $barang->nama_barang }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $barang->merk }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $barang->tahun_datang }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $barang->lokasi->nama_lokasi }}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $barang->stock }}
-                                            </td>
-                                            <td class="px-6 py-4 text-right flex lg:gap-10 md:gap-16 justify-center items-center">
-                                                <a href="#" class="updateBarangForm font-medium text-blue-600 hover:underline flex items-center" 
-                                                    data-modal-target="crud-edit" 
-                                                    data-modal-toggle="crud-edit" 
-                                                    data-slug="{{ $barang->slug }}" 
-                                                    data-nama_barang="{{ $barang->nama_barang }}" 
-                                                    data-merk="{{ $barang->merk }}" 
-                                                    data-tahun_datang="{{ $barang->tahun_datang }}" 
-                                                    data-lokasi="{{ $barang->lokasi->id }}"
-                                                    data-stock="{{ $barang->stock }}">
-                                                    <i class="mr-2 text-xl ph ph-pencil-simple"></i>Edit
-                                                </a> 
-                                                <a href="#" class="hapusBarang font-medium text-red-600 hover:underline flex items-center" 
-                                                    data-modal-target="popup-modal" 
-                                                    data-modal-toggle="popup-modal"
-                                                    data-slug="{{ $barang->slug }}"
-                                                ><i class="mr-2 text-xl ph ph-trash "></i>Hapus</a>  
-                                            </td>
-                                        </tr> 
-                                    @endforeach
-                                @else
-                                    <tr class="bg-white border-b hover:bg-gray-100">
-                                        <td colspan="7">No Data Found!</td>
-                                    </tr>
+        <div class="relative z-10 lg:ml-0 md:ml-10 flex lg:justify-center md:justify-start overflow-x-auto top-5">
+            <table class="md:w-full lg:w-[87%] text-sm text-left text-gray-500 rtl:text-right">
+                <thead class="text-sm text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">No</th>
+                        <th scope="col" class="px-6 py-3">Barang</th>
+                        <th scope="col" class="px-6 py-3">Merk</th>
+                        <th scope="col" class="px-6 py-3">Tahun Masuk</th>
+                        <th scope="col" class="px-6 py-3">Lokasi</th>
+                        <th scope="col" class="px-6 py-3">Stok</th>
+                        <!-- Kolom "Aksi" hanya untuk admin -->
+                        @if(auth()->user()->user_type == 'admin')
+                            <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                        @endif
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (count($all) > 0)
+                        @foreach ($all as $barang)
+                            <tr class="bg-white border-b hover:bg-gray-100">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {{ $loop->iteration }}
+                                </th>
+                                <td class="px-6 py-4">{{ $barang->nama_barang }}</td>
+                                <td class="px-6 py-4">{{ $barang->merk }}</td>
+                                <td class="px-6 py-4">{{ $barang->tahun_datang }}</td>
+                                <td class="px-6 py-4">{{ $barang->lokasi->nama_lokasi }}</td>
+                                <td class="px-6 py-4">{{ $barang->stock }}</td>
+                                <!-- Kolom "Aksi" hanya untuk admin -->
+                                @if(auth()->user()->user_type == 'admin')
+                                    <td class="px-6 py-4 text-right flex lg:gap-10 md:gap-16 justify-center items-center">
+                                        <a href="#" class="updateBarangForm font-medium text-blue-600 hover:underline flex items-center"
+                                            data-modal-target="crud-edit"
+                                            data-modal-toggle="crud-edit"
+                                            data-slug="{{ $barang->slug }}"
+                                            data-nama_barang="{{ $barang->nama_barang }}"
+                                            data-merk="{{ $barang->merk }}"
+                                            data-tahun_datang="{{ $barang->tahun_datang }}"
+                                            data-lokasi="{{ $barang->lokasi->id }}"
+                                            data-stock="{{ $barang->stock }}">
+                                            <i class="mr-2 text-xl ph ph-pencil-simple"></i>Edit
+                                        </a>
+                                        <a href="#" class="hapusBarang font-medium text-red-600 hover:underline flex items-center"
+                                            data-modal-target="popup-modal"
+                                            data-modal-toggle="popup-modal"
+                                            data-slug="{{ $barang->slug }}">
+                                            <i class="mr-2 text-xl ph ph-trash"></i>Hapus
+                                        </a>
+                                    </td>
                                 @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <td colspan="{{ auth()->user()->user_type == 'admin' ? 7 : 6 }}">No Data Found!</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
                 {{-- <div class="relative flex justify-center mt-10">
                     <nav aria-label="Page navigation example">
                         <ul class="flex items-center h-10 -space-x-px text-base">

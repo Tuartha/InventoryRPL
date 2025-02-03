@@ -26,6 +26,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('kelas');
             $table->dropColumn('nis');
+            $table->dropColumn('user_type');
         });
     }
 };

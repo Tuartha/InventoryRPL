@@ -8,24 +8,13 @@
         <button type="button" class="listBtn text-lg flex items-center text-black sidebar-toggle">
             <i class="ph ph-list"></i>
         </button>
-            <a href="{{ route($currentRoute) }}" class="font-medium text-black uppercase hover:text-gray-600">{{ $currentRoute }}</a>
+            <a href="{{ route($currentRoute) }}" class="font-medium text-black capitalize hover:text-gray-600">{{ $currentRoute }}</a>
     </div>
     <ul class="flex items-center ml-auto">
         <li class="ml-3 dropdown">
-            <button type="button" class="flex items-center dropdown-toggle">
+            <a href="{{ route("profile.update") }}" class="flex items-center dropdown-toggle">
                 <img src="" alt="profil" class="block object-cover w-8 h-8 align-middle rounded">
-            </button>
-            <ul
-                class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                <li>
-                    <a href="{{ route("profile.update") }}"
-                        class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                </li>
-                <li>
-                    <a href="{{ route("logout") }}"
-                        class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                </li>
-            </ul>
+            </a>
         </li>
     </ul>
 </div>

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'nis',
         'email',
         'password',
+        'user_type',
         'kelas',
         'nis',
     ];

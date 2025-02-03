@@ -1,6 +1,6 @@
     <x-app-layout>
-        <div class="container px-4 md:px-10">
-            <div class="mt-16 mb-10">
+        <div class="container px-7 md:px-20">
+            <div class="pt-16 pb-10">
                 <h1 class="text-3xl font-bold text-white">Data Pengembalian </h1>
             </div>
             <form class="max-w-full mx-auto">
@@ -24,6 +24,7 @@
                             <th scope="col" class="px-6 py-3 text-center">TANGGAL PINJAM</th>
                             <th scope="col" class="px-6 py-3 text-center">PEMINJAM</th>
                             <th scope="col" class="px-6 py-3 text-center">BARANG</th>
+                            <th scope="col" class="px-6 py-3 text-center">MERK</th>
                             <th scope="col" class="px-6 py-3 text-center">JUMLAH</th>
                             <th scope="col" class="px-6 py-3 text-center">KEMBALIKAN</th>
                         </tr>
@@ -42,6 +43,9 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{ $data->barang->nama_barang }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $data->barang->merk }}
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{ $data->jumlah }}

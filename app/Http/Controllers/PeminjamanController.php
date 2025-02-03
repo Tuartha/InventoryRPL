@@ -13,12 +13,26 @@ use Illuminate\Support\Facades\Auth;
 class PeminjamanController extends Controller
 {
     public function index() {
-        $pengembalian = Peminjaman::where('status', 'dipinjam')->get();
+        $user = Auth::user();
+        if ($user->user_type === 'admin') {
+            $pengembalian = Peminjaman::where('status', 'dipinjam')->get(); 
+        } else {
+            $pengembalian = Peminjaman::where('users_id', $user->id)
+                                    ->where('status', 'dipinjam')
+                                    ->get();
+        }
         return view('pengembalian', compact('pengembalian'));
     }
 
     public function sKembali() {
-        $laporans = Peminjaman::where('status', 'dikembalikan')->get();
+        $user = Auth::user();
+        if ($user->user_type === 'admin') {
+            $laporans = Peminjaman::where('status', 'dikembalikan')->get(); 
+        } else {
+            $laporans = Peminjaman::where('users_id', $user->id)
+                                    ->where('status', 'dikembalikan')
+                                    ->get();
+        }
         return view('laporan', compact('laporans'));
     }
 
@@ -73,12 +87,6 @@ class PeminjamanController extends Controller
             $peminjaman->status = "dikembalikan";
             $peminjaman->tanggal_kembali = Carbon::now();
             $peminjaman->save();
-
-            // $laporan = new Laporan;
-            // $laporan->peminjaman_id = $peminjaman->id;
-            // $laporan->tanggal_kembali = Carbon::now();
-            // dd($laporan);
-            // $laporan->save();
     
             return response()->json(['message' => 'Barang berhasil dikembalikan'], 200);
         } catch (\Exception $e) {

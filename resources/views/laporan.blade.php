@@ -1,7 +1,8 @@
 <x-app-layout>
-    <div class="container px-4 md:px-10">
-        <div class="mt-16 mb-10">
-            <h1 class="text-3xl font-bold text-white">Data Laporan Pengembalian</h1>
+    <div class="container px-7 md:px-20">
+        <div class="pt-16 pb-10">
+            <h1 class="text-3xl font-bold text-white">Laporan Peminjaman dan Pengembalian</h1>
+
         </div>
         <form class="max-w-full mx-auto">
             <label for="default-search"
@@ -26,10 +27,10 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">NO</th>
+                        <th scope="col" class="px-6 py-3 text-center">PEMINJAM</th>
                         <th scope="col" class="px-6 py-3 text-center">BARANG</th>
                         <th scope="col" class="px-6 py-3 text-center">MERK</th>
                         <th scope="col" class="px-6 py-3 text-center">LOKASI</th>
-                        <th scope="col" class="px-6 py-3 text-center">PEMINJAM</th>
                         <th scope="col" class="px-6 py-3 text-center">TANGGAL PEMINJAMAN</th>
                         <th scope="col" class="px-6 py-3 text-center">TANGGAL PENGEMBALIAN</th>
                         <th scope="col" class="px-6 py-3 text-center">STATUS</th>
@@ -42,6 +43,9 @@
                             {{ $key + 1 }}
                         </th>
                         <td class="px-6 py-4 text-center">
+                            {{ $laporan->user->name }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
                             {{ $laporan->barang->nama_barang }}
                         </td>
                         <td class="px-6 py-4 text-center">
@@ -49,9 +53,6 @@
                         </td>
                         <td class="px-6 py-4 text-center">
                             {{ $laporan->barang->lokasi->nama_lokasi }}
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            {{ $laporan->user->name }}
                         </td>
                         <td class="px-6 py-4 text-center">
                             {{ $laporan->tanggal_pinjam }}

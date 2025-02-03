@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="container px-4 md:px-10">
-        <div class="mt-16 mb-10">
+    <div class="container px-7 md:px-20">
+        <div class="pt-16 pb-10">
             <h1 class="text-3xl font-bold text-white">Formulir Peminjaman Barang</h1>
         </div>
         <div class="bg-white rounded-md">
@@ -8,7 +8,7 @@
                 @csrf
                 <caption class="p-5 text-left text-gray-900 bg-white rtl:text-right">
                     <h1 class="text-xl font-bold">Formulir Peminjaman</h1>
-                    <p class="mt-1 text-sm font-normal text-gray-500">Silahkan isi data dengan benar, ingat kembalikan dan jaga kondisi barang!</p>
+                    <p class="mt-1 text-sm font-normal text-gray-500">Silahkan isi data dengan benar, ingat kembalikan barang kalau sudah selesai pinjam ya!</p>
                 </caption>
                 <div class="grid grid-cols-3 gap-4 mt-5 mb-4">
                     {{-- Nama Peminjam --}}

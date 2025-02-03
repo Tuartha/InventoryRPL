@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <div>
+        <img class="w-auto mx-auto h-[70px]" src="/img/skensaLogo.svg" alt="Logo skensa">
+    </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -41,7 +44,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                {{ __('Sudah memiliki akun?') }}
             </a>
 
             <x-primary-button class="ms-4">
