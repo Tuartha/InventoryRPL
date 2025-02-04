@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div>
-        <img class="w-auto mx-auto h-[70px]" src="/img/skensaLogo.svg" alt="Logo skensa">
+        <img class="w-auto mx-auto h-[70px]" src="<?= asset('assets/skensaLogo.svg') ?>" alt="Logo skensa">
     </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf

@@ -2,9 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <div class="flex flex-col justify-center px-6 py-12  lg:px-8 rounded-xl shadow-gray-600">
+        <div class="flex flex-col justify-center px-6 py-12 lg:px-8 rounded-xl shadow-gray-600">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img class="w-auto mx-auto h-[70px]" src="/img/skensaLogo.svg" alt="Logo skensa">
+                <img class="w-auto mx-auto h-[70px]" src="<?= asset('assets/skensaLogo.svg') ?>" alt="Logo skensa">
                 <h2 class="mt-5 font-bold tracking-tight text-center text-gray-900 text-2xl">INVENTORI LABORATORIUM</h2>
                 <h2 class="mt-1 font-bold tracking-tight text-center text-gray-900 text-2xl">RPL</h2>
             </div>

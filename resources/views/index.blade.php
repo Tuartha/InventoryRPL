@@ -21,7 +21,7 @@
                 <div
                     class="flex flex-col items-start justify-start md:gap-3 w-full h-40 py-5 px-6 bg-white rounded-xl drop-shadow-md lg:w-[26%] md:w-[31%] hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400 transition duration-300 ease-in-out">
                     <div class="flex w-full lg:items-center lg:justify-between md:items-start lg:gap-0 md:gap-[25%]">
-                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm">Barang di Pinjam</p>
+                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm">Barang Sedang Dipinjam</p>
                         <i class="lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-down"></i>
                     </div>
                     <div class="flex items-center">

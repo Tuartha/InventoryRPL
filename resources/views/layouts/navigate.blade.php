@@ -13,7 +13,7 @@
     <ul class="flex items-center ml-auto">
         <li class="ml-3 dropdown">
             <a href="{{ route("profile.update") }}" class="flex items-center dropdown-toggle">
-                <img src="" alt="profil" class="block object-cover w-8 h-8 align-middle rounded">
+                <img src="<?= asset('assets/image.png') ?>" alt="profil" class="block object-cover w-8 h-8 align-middle rounded">
             </a>
         </li>
     </ul>

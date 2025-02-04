@@ -16,7 +16,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/config.js'])
     </head>
     <body class="text-gray-800 font-inter bg-[#EEEEEE]">
         <div class="min-h-screen bg-gray-100">

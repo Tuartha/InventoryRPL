@@ -1,7 +1,7 @@
 <div class="fixed top-0 left-0 z-50 flex flex-col justify-between w-64 h-full p-4 transition-transform bg-gray-900 sidebar-menu">
     <!-- Profil User -->
     <a href="#" class="flex flex-col items-start justify-center pb-4 border-b border-b-gray-500">
-        <img src="{{ asset('img/userimage.jpg') }}" alt="" class="flex object-cover ml-2 rounded-full h-14 w-14">
+        <img src="<?= asset('assets/image.png') ?>" alt="" class="flex object-cover ml-2 rounded-full h-14 w-14">
         <span class="mt-1 font-bold text-white text-md">{{ Auth::user()->name }}</span>
         <p class="text-xs text-gray-300">{{ Auth::user()->email }}</p>
     </a>
