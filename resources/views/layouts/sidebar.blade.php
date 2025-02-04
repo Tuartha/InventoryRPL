@@ -111,16 +111,4 @@
         </form>
     </div>
 </div>
-
-<script>
-    document.getElementById('peminjamanUser').addEventListener('click', function(event) {
-        // Cek apakah kelas sudah diisi
-        var userKelas = @json(auth()->user()->kelas); // Mendapatkan data kelas user di Blade
-        
-        if (!userKelas) {
-            event.preventDefault(); // Mencegah link untuk diikuti
-            alert('Harap isi kelas terlebih dahulu di profil Anda.');
-            window.location.href = "{{ route('profile.update') }}"; // Mengarahkan ke halaman profil
-        }
-    });
-</script>
+<div class="fixed top-0 left-0 z-40 w-full h-full bg-black/50 md:hidden sidebar-overlay"></div>

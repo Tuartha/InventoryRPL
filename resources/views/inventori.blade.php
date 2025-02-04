@@ -131,17 +131,21 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        </script>
-        <script>
             $(document).ready(function() {
                 // Mengambil nama lokasi berdasarkan lokasi_id yang dipilih
                 $('#lokasi_id').on('change', function() {
                     let lokasi_id = $(this).val(); // Mendapatkan lokasi_id yang dipilih
+                    // console.log('Lokasi ID:', lokasi_id);
+
+                    if (!lokasi_id) {
+                        alert('Silakan pilih lokasi terlebih dahulu');
+                        return;
+                    }
         
                     if (lokasi_id) {
                         $.ajax({
-                            url: "{{ route('getLokasiName') }}",
-                            method: 'post',
+                            url: "{{ auth()->user()->user_type == 'admin' ? route('admin.getLokasiName') : route('user.getLokasiName') }}",
+                            method: 'POST',
                             data: {
                                 lokasi_id: lokasi_id,
                                 _token: "{{ csrf_token() }}" // Pastikan untuk menambahkan token CSRF
@@ -150,14 +154,14 @@
                                 if (response.nama_lokasi) {
                                     $('#nama_lokasi').val(response.nama_lokasi); // Menampilkan nama lokasi ke field input
                                 } else {
-                                    alert('Lokasi tidak ditemukan');
+                                    alert('Lokasi tidakk ditemukan');
                                 }
                             },
                             error: function(xhr) {
                                 alert('Terjadi kesalahan dalam mengambil data lokasi');
                             }
                         });
-                    }
+                    } 
                 });
         
                 $(document).on('submit', '#addBarangForm', function(e) {

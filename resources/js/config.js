@@ -6,121 +6,126 @@ Alpine.start();
 
 // Sidebar toggle logic
 document.addEventListener("DOMContentLoaded", function () {
-  const sidebarToggle = document.querySelector(".sidebar-toggle");
-  const sidebarOverlay = document.querySelector(".sidebar-overlay");
-  const sidebarMenu = document.querySelector(".sidebar-menu");
+    const sidebarToggle = document.querySelector(".sidebar-toggle");
+    const sidebarOverlay = document.querySelector(".sidebar-overlay");
+    const sidebarMenu = document.querySelector(".sidebar-menu");
 
-  function toggleSidebar() {
-      const isOpen = sidebarMenu.classList.contains("open");
+    // console.log("Sidebar Toggle:", sidebarToggle);
+    // console.log("Sidebar Overlay:", sidebarOverlay);
+    // console.log("Sidebar Menu:", sidebarMenu);
 
-      if (isOpen) {
-          // Menutup sidebar
-          sidebarMenu.classList.remove("open");
-          sidebarOverlay.classList.remove("show");
-      } else {
-          // Membuka sidebar
-          sidebarMenu.classList.add("open");
-          sidebarOverlay.classList.add("show");
-      }
-  }
+    if (sidebarToggle && sidebarOverlay && sidebarMenu) {
+        function toggleSidebar() {
+            const isOpen = sidebarMenu.classList.contains("open");
 
-  // Event listener untuk tombol sidebar
-  sidebarToggle.addEventListener("click", function (e) {
-      e.preventDefault();
-      toggleSidebar();
-  });
+            if (isOpen) {
+                sidebarMenu.classList.remove("open");
+                sidebarOverlay.classList.remove("show");
+            } else {
+                sidebarMenu.classList.add("open");
+                sidebarOverlay.classList.add("show");
+            }
+        }
 
-  // Menutup sidebar saat overlay diklik
-  sidebarOverlay.addEventListener("click", function (e) {
-      e.preventDefault();
-      toggleSidebar();
-  });
-});
+        sidebarToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            toggleSidebar();
+        });
 
-
-
-// start: Popper
-const popperInstance = {};
-document.querySelectorAll(".dropdown").forEach(function (item, index) {
-  const popperId = "popper-" + index;
-  const toggle = item.querySelector(".dropdown-toggle");
-  const menu = item.querySelector(".dropdown-menu");
-  menu.dataset.popperId = popperId;
-  popperInstance[popperId] = Popper.createPopper(toggle, menu, {
-    modifiers: [
-      {
-        name: "offset",
-        options: {
-          offset: [0, 8],
-        },
-      },
-      {
-        name: "preventOverflow",
-        options: {
-          padding: 24,
-        },
-      },
-    ],
-    placement: "bottom-end",
-  });
-});
-document.addEventListener("click", function (e) {
-  const toggle = e.target.closest(".dropdown-toggle");
-  const menu = e.target.closest(".dropdown-menu");
-  if (toggle) {
-    const menuEl = toggle.closest(".dropdown").querySelector(".dropdown-menu");
-    const popperId = menuEl.dataset.popperId;
-    if (menuEl.classList.contains("hidden")) {
-      hideDropdown();
-      menuEl.classList.remove("hidden");
-      showPopper(popperId);
+        sidebarOverlay.addEventListener("click", function (e) {
+            e.preventDefault();
+            toggleSidebar();
+        });
     } else {
-      menuEl.classList.add("hidden");
-      hidePopper(popperId);
+        console.error("Sidebar elements not found! Check HTML structure.");
     }
-  } else if (!menu) {
-    hideDropdown();
-  }
 });
 
-function hideDropdown() {
-  document.querySelectorAll(".dropdown-menu").forEach(function (item) {
-    item.classList.add("hidden");
-  });
-}
-function showPopper(popperId) {
-  popperInstance[popperId].setOptions(function (options) {
-    return {
-      ...options,
-      modifiers: [...options.modifiers, { name: "eventListeners", enabled: true }],
-    };
-  });
-  popperInstance[popperId].update();
-}
-function hidePopper(popperId) {
-  popperInstance[popperId].setOptions(function (options) {
-    return {
-      ...options,
-      modifiers: [...options.modifiers, { name: "eventListeners", enabled: false }],
-    };
-  });
-}
-// end: Popper
+
 // start: Tab
 document.querySelectorAll('[data-tab]').forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        e.preventDefault()
-        const tab = item.dataset.tab
-        const page = item.dataset.tabPage
-        const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
-        document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
-            i.classList.remove('active')
-        })
-        document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
-            i.classList.add('hidden')
-        })
-        item.classList.add('active')
-        target.classList.remove('hidden')
-    })
+  item.addEventListener('click', function (e) {
+      e.preventDefault()
+      const tab = item.dataset.tab
+      const page = item.dataset.tabPage
+      const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
+      document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function (i) {
+          i.classList.remove('active')
+      })
+      document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function (i) {
+          i.classList.add('hidden')
+      })
+      item.classList.add('active')
+      target.classList.remove('hidden')
+  })
 })
 // end: Tab
+
+
+// // start: Popper
+// const popperInstance = {};
+// document.querySelectorAll(".dropdown").forEach(function (item, index) {
+//   const popperId = "popper-" + index;
+//   const toggle = item.querySelector(".dropdown-toggle");
+//   const menu = item.querySelector(".dropdown-menu");
+//   menu.dataset.popperId = popperId;
+//   popperInstance[popperId] = Popper.createPopper(toggle, menu, {
+//     modifiers: [
+//       {
+//         name: "offset",
+//         options: {
+//           offset: [0, 8],
+//         },
+//       },
+//       {
+//         name: "preventOverflow",
+//         options: {
+//           padding: 24,
+//         },
+//       },
+//     ],
+//     placement: "bottom-end",
+//   });
+// });
+// document.addEventListener("click", function (e) {
+//   const toggle = e.target.closest(".dropdown-toggle");
+//   const menu = e.target.closest(".dropdown-menu");
+//   if (toggle) {
+//     const menuEl = toggle.closest(".dropdown").querySelector(".dropdown-menu");
+//     const popperId = menuEl.dataset.popperId;
+//     if (menuEl.classList.contains("hidden")) {
+//       hideDropdown();
+//       menuEl.classList.remove("hidden");
+//       showPopper(popperId);
+//     } else {
+//       menuEl.classList.add("hidden");
+//       hidePopper(popperId);
+//     }
+//   } else if (!menu) {
+//     hideDropdown();
+//   }
+// });
+
+// function hideDropdown() {
+//   document.querySelectorAll(".dropdown-menu").forEach(function (item) {
+//     item.classList.add("hidden");
+//   });
+// }
+// function showPopper(popperId) {
+//   popperInstance[popperId].setOptions(function (options) {
+//     return {
+//       ...options,
+//       modifiers: [...options.modifiers, { name: "eventListeners", enabled: true }],
+//     };
+//   });
+//   popperInstance[popperId].update();
+// }
+// function hidePopper(popperId) {
+//   popperInstance[popperId].setOptions(function (options) {
+//     return {
+//       ...options,
+//       modifiers: [...options.modifiers, { name: "eventListeners", enabled: false }],
+//     };
+//   });
+// }
+// // end: Popper

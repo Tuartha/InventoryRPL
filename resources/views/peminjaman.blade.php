@@ -88,5 +88,21 @@
                 });
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const peminjamanUser = document.getElementById('peminjamanUser');
+
+        if (peminjamanUser) {
+            peminjamanUser.addEventListener('click', function(event) {
+                var userKelas = @json(auth()->user()->kelas);
+                
+                if (!userKelas) {
+                    event.preventDefault();
+                    alert('Harap isi kelas terlebih dahulu di profil Anda.');
+                    window.location.href = "{{ route('profile.update') }}";
+                }
+            });
+        }
+        });
     </script>
 </x-app-layout>
