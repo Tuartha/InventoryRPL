@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="container px-7 md:px-20">
-        <div class="pt-16 pb-10">
+    <div class="container px-7 md:px-10 lg:px-20">
+        <div class="pt-16 pb-8 lg:px-0">
             <h1 class="text-3xl font-bold text-white">Formulir Peminjaman Barang</h1>
         </div>
         <div class="bg-white rounded-md">

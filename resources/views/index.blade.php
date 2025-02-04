@@ -1,7 +1,7 @@
 <x-app-layout>
         <div class="container px-7">
-            <div class="pt-14 lg:pb-4 md:pb-0 lg:px-9 md:px-3">
-                <p class="text-white">Selamat Datang {{ Auth::user()->name }} di,</p>
+            <div class="pt-14 lg:pb-4  md:pb-0 lg:px-9 md:px-3">
+                <p class="md:text-base sm:text-[9px] text-white">Selamat Datang {{ Auth::user()->name }} di,</p>
                 <h1 class="text-2xl font-bold text-white md:text-3xl">
                     Dashboard Inventori Laboratorium RPL SMKN 1 Denpasar
                 </h1>

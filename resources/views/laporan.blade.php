@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="container px-7 md:px-20">
-        <div class="pt-16 pb-10">
+    <div class="container px-7 md:px-10 lg:px-20">
+        <div class="pt-16 pb-8 lg:px-0">
             <h1 class="text-3xl font-bold text-white">Laporan Peminjaman dan Pengembalian</h1>
 
         </div>
-        <form class="max-w-full mx-auto">
+        <form class="max-w-full mx-auto lg:px-0 md:px-0">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -22,8 +22,8 @@
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
         </form>
-        <div class="relative z-10 flex justify-center mb-10 overflow-x-auto drop-shadow-md top-5">
-            <table class="w-full text-sm text-left text-gray-500 bg-white rtl:text-right drop-shadow-md">
+        <div class="relative z-10 flex lg:ml-0 md:ml-0 lg:justify-center md:justify-start  mb-10 overflow-x-auto drop-shadow-md top-5">
+            <table class="md:w-full lg:w-[100%] text-sm text-left text-gray-500 bg-white rtl:text-right drop-shadow-md">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-center">NO</th>
