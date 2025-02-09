@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,11 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('login');
 });
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->name('login');
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -38,6 +42,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/inventori/add', [BarangController::class, 'addForm'])->name('addBarang');
     Route::post('/inventori/update', [BarangController::class, 'editForm'])->name('editBarang');
     Route::post('/inventori/delete', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
+    Route::get('/allUser', [UserController::class, 'allUser'])->name('user');
+    Route::get('/verifUser', [UserController::class, 'verifUser'])->name('verifUser');
 });
 
 // Route untuk user
@@ -56,6 +62,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route::get('/set-session', function () {
+//     session(['test_key' => 'Hello, Laravel!']);
+//     return 'Session set!';
+// });
+
+// Route::get('/get-session', function () {
+//     return session('test_key', 'Session tidak ditemukan');
+// });
 
 require __DIR__.'/auth.php';
 

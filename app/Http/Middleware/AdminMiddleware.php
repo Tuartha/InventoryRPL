@@ -19,6 +19,6 @@ class AdminMiddleware
         if(Auth::check() && Auth::user()->user_type == 'admin') {
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->withErrors(['access' => 'Tidak memiliki akses']);
     }
 }

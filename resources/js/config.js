@@ -39,6 +39,27 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("Sidebar elements not found! Check HTML structure.");
     }
+
+    const dropdownToggle = document.querySelector("#kelola-user-dropdown .sidebar-dropdown-toggle");
+    const dropdownMenu = document.getElementById("kelola-user-menu");
+    const dropdownIcon = dropdownToggle.querySelector("i.ph-caret-right");
+
+    dropdownToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        const isOpen = !dropdownMenu.classList.contains("hidden");
+        // Toggle dropdown menu
+        dropdownMenu.classList.toggle("hidden");
+        // Toggle arrow icon rotation
+        dropdownIcon.classList.toggle("rotate-90", !isOpen);
+        // Simpan state di localStorage agar tetap terbuka saat refresh
+        localStorage.setItem("kelolaUserDropdown", isOpen ? "closed" : "open");
+    });
+
+    // Pulihkan state dropdown saat halaman dimuat
+    if (localStorage.getItem("kelolaUserDropdown") === "open") {
+        dropdownMenu.classList.remove("hidden");
+        dropdownIcon.classList.add("rotate-90");
+    }
 });
 
 
