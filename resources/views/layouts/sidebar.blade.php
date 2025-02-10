@@ -51,6 +51,28 @@
                     <span class="text-sm">Laporan</span>
                 </a>
             </li>
+            <li class="mb-1 group" id="kelola-user-dropdown">
+                <a href="#" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md 
+                    sidebar-dropdown-toggle">
+                    <i class="mr-2 text-lg ph ph-user-gear"></i>
+                    <span class="text-sm">Kelola User</span>
+                    <i class="ph ph-caret-right ml-auto transition-transform duration-300"></i>
+                </a>
+                <ul class="mt-2 hidden bg-gray-950 rounded-lg" id="kelola-user-menu" style="list-style: none;">
+                    <li>
+                        <a href="{{ route('user') }}" class="flex items-center w-full pt-3 pb-2 text-sm text-gray-100 
+                            before:w-1 before:rounded-full before:bg-gray-300 before:mr-3 pl-7">
+                            User Terdaftar
+                        </a>
+                    </li>   
+                    <li>
+                        <a href="{{ route('verifUser') }}" class="text-gray-300 text-sm hover:text-gray-100 
+                            before:w-1 before:rounded-full before:bg-gray-300 before:mr-3 flex items-center pl-7 w-full pt-2 pb-3">
+                            Verifikasi Akun
+                        </a>
+                    </li>
+                </ul>
+            </li>            
         @endif
 
         @if(auth()->user()->user_type == 'user')
