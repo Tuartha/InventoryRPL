@@ -1,8 +1,8 @@
 <x-app-layout>
-        <div class="container px-7">
-            <div class="pt-14 lg:pb-4  md:pb-0 lg:px-9 md:px-3">
-                <p class="md:text-base sm:text-[9px] text-white">Selamat Datang {{ Auth::user()->name }} di,</p>
-                <h1 class="text-2xl font-bold text-white md:text-3xl">
+        <div class="container px-6">
+            <div class="pt-14 lg:pb-4 md:pb-0 lg:px-9 md:px-3">
+                <p class="md:text-base text-base text-white">Selamat Datang {{ Auth::user()->name }} di,</p>
+                <h1 class="text-3xl font-bold text-white md:text-3xl">
                     Dashboard Inventori Laboratorium RPL SMKN 1 Denpasar
                 </h1>
             </div>
@@ -10,43 +10,43 @@
                 class="container relative flex flex-col justify-center gap-10 md:flex-row lg:gap-24 md:gap-2 top-10">
                 <div
                     class="flex flex-col items-start justify-start md:gap-3 w-full h-40 py-5 px-6 bg-white rounded-xl drop-shadow-md lg:w-[26%] md:w-[31%] hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400 transition duration-300 ease-in-out">
-                    <div class="flex w-full lg:items-center lg:justify-between md:items-start">
-                        <p class="text-black/80 lg:text-base md:text-sm">Total Barang Tersedia</p>
-                        <i class="lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-toolbox"></i>
+                    <div class="flex w-full justify-between sm:justify-between lg:items-center md:items-start">
+                        <p class="text-black/80 lg:text-base md:text-sm text-lg">Total Barang Tersedia</p>
+                        <i class="text-4xl px-2 py-1 lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-toolbox"></i>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-xl font-bold text-black/80 md:text-4xl">{{ $totalBarang }}</span>
+                        <span class="text-4xl font-bold text-black/80 md:text-4xl">{{ $totalBarang }}</span>
                     </div>
                 </div>
                 <div
                     class="flex flex-col items-start justify-start md:gap-3 w-full h-40 py-5 px-6 bg-white rounded-xl drop-shadow-md lg:w-[26%] md:w-[31%] hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400 transition duration-300 ease-in-out">
-                    <div class="flex w-full lg:items-center lg:justify-between md:items-start lg:gap-0 md:gap-[25%]">
-                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm">Barang Sedang Dipinjam</p>
-                        <i class="lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-down"></i>
+                    <div class="flex w-full justify-between lg:items-center lg:justify-between md:items-start lg:gap-0 md:gap-[25%]">
+                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm text-lg">Barang Sedang Dipinjam</p>
+                        <i class="text-4xl px-2 py-1 lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-down"></i>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-xl font-bold text-black/80 md:text-4xl">{{ $peminjaman }}</span>
+                        <span class="text-4xl font-bold text-black/80 md:text-4xl">{{ $peminjaman }}</span>
                     </div>
                 </div>
                 <div
                     class="flex flex-col items-start justify-start md:gap-3 w-full h-40 py-5 px-6 bg-white rounded-xl drop-shadow-md lg:w-[26%] md:w-[31%] hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-gray-400 transition duration-300 ease-in-out">
-                    <div class="flex w-full lg:items-center lg:justify-between md:items-start lg:gap-0 md:gap-[25%]">
-                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm">Barang di Kembalikan</p>
-                        <i class="lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-up"></i>
+                    <div class="flex w-full justify-between lg:items-center lg:justify-between md:items-start lg:gap-0 md:gap-[25%]">
+                        <p class="text-black/80 lg:text-base lg:w-full md:w-1/2 md:text-sm text-lg">Barang di Kembalikan</p>
+                        <i class="text-4xl px-2 py-1 lg:text-2xl lg:px-2 lg:py-1 md:px-1 md:text-xl  text-[#00ADB5] bg-[#00ADB5] bg-opacity-20 ph ph-hand-arrow-up"></i>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-xl font-bold text-black/80 md:text-4xl">{{ $pengembalian }}</span>
+                        <span class="text-4xl font-bold text-black/80 md:text-4xl">{{ $pengembalian }}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="relative flex justify-center mt-20 md:overflow-x-auto">
-            <table class="text-sm text-left text-gray-500 lg:w-[89%] md:w-[70%] rtl:text-right lg:overflow-x-hidden md:overflow-x-scroll ">
+        <div class="flex justify-center mt-20 md:overflow-x-auto">
+            <table class="text-sm text-left w-[89%]  text-gray-500 lg:w-[89%] md:w-[69%] rtl:text-right lg:overflow-x-hidden md:overflow-x-scroll ">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white rtl:text-right ">
                     Barang Dipinjam Hari Ini
                     <p class="mt-1 text-sm font-normal text-gray-500 ">Data peminjaman barang laboratorium RPL per hari ini.</p>
                 </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-500">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             NO
