@@ -3,6 +3,10 @@
 @tailwind utilities;
 @source "../views";
 
+div.dt-container select.dt-input {
+    padding: 4px 20px 4px 10px !important;
+}
+
 /* Sidebar Mode Default (Desktop) */
 .sidebar-menu {
     position: fixed;

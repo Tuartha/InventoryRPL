@@ -4,7 +4,7 @@
             <h1 class="text-3xl font-bold text-white">Formulir Peminjaman Barang</h1>
         </div>
         <div class="bg-white rounded-md">
-            <form class="p-4 md:p-5" action="{{ route('peminjaman.store') }}" method="POST">
+            <form class="p-4 md:p-5" action="{{ route('admin.peminjaman.store') }}" method="POST">
                 @csrf
                 <caption class="p-5 text-left text-gray-900 bg-white rtl:text-right">
                     <h1 class="text-xl font-bold">Formulir Peminjaman</h1>

@@ -14,7 +14,8 @@
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+        <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/config.js'])
     </head>
@@ -40,7 +41,6 @@
                 </div>
             </main>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </body>
 </html>

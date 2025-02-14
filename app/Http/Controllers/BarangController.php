@@ -42,9 +42,9 @@ class BarangController extends Controller
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status' => 'fail',
                 'message' => 'Terjadi kesalahan saat menambahkan barang: ' . $e->getMessage()
-            ], 500);
+            ]);
         }
     }
 
@@ -80,7 +80,7 @@ class BarangController extends Controller
             }
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status' => 'fail',
                 'message' => 'Terjadi kesalahan saat mengupdate barang: ' . $e->getMessage()
             ], 500);
         }
@@ -94,12 +94,18 @@ class BarangController extends Controller
         $barang = Barang::where('slug', $slug)->first();
 
         if (!$barang) {
-            return response()->json(['message' => 'Barang tidak ditemukan'], 404);
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Barang tidak ditemukan!'
+            ]);
         }
 
         // Hapus barang dari database
         $barang->delete();
 
-        return response()->json(['message' => 'Barang berhasil dihapus']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Barang berhasil dihapus'
+        ]);
     }
 }

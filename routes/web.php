@@ -33,9 +33,9 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/peminjaman', [PeminjamanController::class, 'create'])->name('admin.peminjaman');
-    Route::post('/admin/peminjaman/store', [PeminjamanController::class, 'store'])->name('admin.peminjaman.store');
+    Route::post('/admin/peminjaman', [PeminjamanController::class, 'store'])->name('admin.peminjaman.store');
     Route::get('/admin/pengembalian', [PeminjamanController::class, 'index'])->name('admin.pengembalian');
-    Route::post('/admin/pengembalian/{id}', [PeminjamanController::class, 'kembalikan'])->name('admin.pengembalian.update');
+    Route::post('/admin/pengembalian/{id}', [PeminjamanController::class, 'kembalikan'])->name('admin.pengembalian.kembalikan');
     Route::get('/admin/laporan', [PeminjamanController::class, 'sKembali'])->name('admin.laporan');
     Route::post('/admin/getLokasiName', [LokasiController::class, 'getLokasiName'])->name('admin.getLokasiName');
     Route::get('/admin/inventori', [BarangController::class, 'loadAll'])->name('admin.inventori');
@@ -63,31 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/set-session', function () {
-//     session(['test_key' => 'Hello, Laravel!']);
-//     return 'Session set!';
-// });
-
-// Route::get('/get-session', function () {
-//     return session('test_key', 'Session tidak ditemukan');
-// });
-
 require __DIR__.'/auth.php';
-
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/peminjaman', [PeminjamanController::class, 'create'])->name('peminjaman');
-// Route::middleware(['web', 'auth'])->group(function () {
-//     Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
-//     Route::get('/pengembalian', [PeminjamanController::class, 'index'])->name('pengembalian');
-//     Route::post('/pengembalian/{id}', [PeminjamanController::class, 'kembalikan'])->name('pengembalian.update');
-// });
-// Route::get('/laporan', [PeminjamanController::class, 'sKembali'])->name('laporan');
-// Route::post('/getLokasiName', [LokasiController::class, 'getLokasiName'])->name('getLokasiName');
-// Route::get('/inventori', [BarangController::class, 'loadAll'])->name('inventori');
-// Route::post('/inventori/add', [BarangController::class, 'addForm'])->name('addBarang');
-// Route::post('/inventori/update', [BarangController::class, 'editForm'])->name('editBarang');
-// Route::post('/inventori/delete', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

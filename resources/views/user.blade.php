@@ -37,6 +37,12 @@
                             Email
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
+                            Kelas
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            NIS
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
                             Tipe
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
@@ -50,38 +56,54 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b hover:bg-gray-100">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap">
-                            1
-                        </th>
-                        <td class="px-6 py-4 text-center">
-                            Badra
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            badragaming01@gmail.com
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            atmin
-                        </td>
+                    @foreach ($all as $user)
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap">
+                                {{ $loop->iteration }}
+                            </th>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->name }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->email }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->kelas }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->nis }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->user_type }}
+                            </td>
 
-                        <td class="px-6 py-4 text-right ">
-                            <a href="#" class="flex items-center font-medium text-blue-600 hover:text-blue-800"
-                                data-modal-target="crud-edit" data-modal-toggle="crud-edit"><i
-                                    class="mr-2 text-xl ph ph-pencil-simple "></i>Edit</a>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="flex items-center font-medium text-red-600 hover:text-red-800"
-                                data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                                <i class="mr-2 text-xl ph ph-trash"></i>Hapus
-                            </a>
-                        </td>
-                    </tr>
+                            <td class="px-6 py-4 text-right ">
+                                <a href="#" class="flex items-center font-medium text-blue-600 hover:text-blue-800"
+                                    data-modal-target="crud-edit" data-modal-toggle="crud-edit"
+                                    data-id="{{ $user->id }}"
+                                    data-name="{{ $user->name }}"
+                                    data-email="{{ $user->email }}"
+                                    data-kelas="{{ $user->kelas }}"
+                                    data-nis="{{ $user->nis }}"
+                                    data-user_type="{{ $user->user_type }}">
+                                    <i class="mr-2 text-xl ph ph-pencil-simple "></i>
+                                    Edit</a>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="flex items-center font-medium text-red-600 hover:text-red-800"
+                                    data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                    data-id="{{ $user->id }}">
+                                    <i class="mr-2 text-xl ph ph-trash"></i>Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="relative flex justify-center mt-10">
+    {{-- <div class="relative flex justify-center mt-10">
         <nav aria-label="Page navigation example">
             <ul class="flex items-center h-10 -space-x-px text-base">
                 <li>
@@ -128,5 +150,5 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </div> --}}
 </x-app-layout>
