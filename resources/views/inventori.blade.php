@@ -1,19 +1,19 @@
 <x-app-layout>
-    <div class="container lg:w-[100%] md:w-[87%]">
-        <div class="pt-16 pb-8 lg:px-20 md:px-[2.5rem]">
+    <div class="container lg:w-[100%] md:w-[90%]">
+        <div class="pt-16 pb-8 lg:px-20 md:px-[3rem] sm:px-[2rem]">
             <h1 class="text-3xl font-bold text-white">Inventori Barang di Laboratorium RPL SMKN 1 Denpasar</h1>
         </div>
     
         <!-- Tombol "Barang Baru" hanya untuk admin -->
         @if(auth()->user()->user_type == 'admin')
             <button type="button" data-modal-target="crud-tambah" data-modal-toggle="crud-tambah"
-                class="flex items-center justify-center gap-2 md:mx-[2.5rem] lg:mx-20 text-white bg-[#222831] hover:bg-opacity-85 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
+                class="flex items-center justify-center gap-2 md:mx-[3rem] lg:mx-20 text-white bg-[#222831] hover:bg-opacity-85 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                 <i class="font-bold ph ph-plus"></i> Barang baru
             </button>
         @endif
     
-        <div class="relative z-10 lg:ml-0 md:ml-10 flex lg:justify-center md:justify-start overflow-x-auto top-5">
-            <table class="md:w-full lg:w-[87%] text-sm text-left text-gray-500 rtl:text-right">
+        <div class="bg-white rounded-sm relative py-2 px-2 z-10 lg:ml-20 lg:mr-20 md:ml-12 md:mr-0 md:justify-start overflow-x-auto top-5">
+            <table id="barangTable" class="md:w-full lg:w-[87%] pt-5 pb-5 text-sm text-left text-gray-500 rtl:text-right"> 
                 <thead class="text-sm text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3">No</th>
@@ -24,7 +24,7 @@
                         <th scope="col" class="px-6 py-3">Stok</th>
                         <!-- Kolom "Aksi" hanya untuk admin -->
                         @if(auth()->user()->user_type == 'admin')
-                            <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                            <th scope="col" class="px-6 py-3">Aksi</th>
                         @endif
                     </tr>
                 </thead>
@@ -73,65 +73,34 @@
             </table>
         </div>
     </div>
-                {{-- <div class="relative flex justify-center mt-10">
-                    <nav aria-label="Page navigation example">
-                        <ul class="flex items-center h-10 -space-x-px text-base">
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 ">
-                                    <span class="sr-only">Previous</span>
-                                    <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M5 1 1 5l4 4" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" aria-current="page"
-                                    class="z-10 flex items-center justify-center h-10 px-4 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">1</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">2</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">3</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">4</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">5</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-10 px-4 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 ">
-                                    <span class="sr-only">Next</span>
-                                    <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 9 4-4-4-4" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-    
-                </div> --}}
         @include('profile/partials/add_form')
         @include('profile/partials/edit_form')
         @include('profile/partials/delete_form')
+        @include('components.alerts')
         <script>
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $(document).ready(function() {
+            $(document).ready( function () {
+                $('#barangTable').DataTable({
+                    "paging": true, // Mengaktifkan fitur pagination
+                    "searching": true, // Mengaktifkan fitur pencarian
+                    "ordering": true, // Mengaktifkan fitur sorting
+                    "info": true, // Menampilkan info jumlah data
+                    "lengthChange": true, // Menampilkan opsi jumlah data per halaman
+                    "columnDefs": [
+                        {
+                            "targets": -1, // Menargetkan kolom terakhir (Aksi)
+                            "orderable": false // Menonaktifkan fitur sorting di kolom Aksi
+                        }
+                    ],
+                    "language": {
+                        "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                        "zeroRecords": "Data tidak ditemukan",
+                        "info": "Menampilkan _START_ hingga _END_ dari _TOTAL_ data",
+                        "infoEmpty": "Tidak ada data yang tersedia",
+                        "infoFiltered": "(disaring dari _MAX_ total data)",
+                        "search": "Cari:",
+                    }
+                });
+
                 // Mengambil nama lokasi berdasarkan lokasi_id yang dipilih
                 $('#lokasi_id').on('change', function() {
                     let lokasi_id = $(this).val(); // Mendapatkan lokasi_id yang dipilih
@@ -154,11 +123,11 @@
                                 if (response.nama_lokasi) {
                                     $('#nama_lokasi').val(response.nama_lokasi); // Menampilkan nama lokasi ke field input
                                 } else {
-                                    alert('Lokasi tidakk ditemukan');
+                                    showModal('Lokasi tidakk ditemukan', 'fail');
                                 }
                             },
                             error: function(xhr) {
-                                alert('Terjadi kesalahan dalam mengambil data lokasi');
+                                showModal('Terjadi kesalahan dalam mengambil data lokasi', 'fail');
                             }
                         });
                     } 
@@ -185,15 +154,15 @@
                         },
                         success: function(response) {
                             if (response.status === 'success') {
-                                location.reload();
-                                alert(response.message);
+                                showModal(response.message, response.status)
+                                $('#addBarangForm')[0].reset();
                             } else {
-                                alert(response.message);
+                                showModal(response.message, response.status)
                             }
                         },
                         error: function(xhr) {
                             let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menambahkan barang';
-                            alert(errorMessage); 
+                            showModal(errorMessage, 'fail')
                         }
                     });
                 });
@@ -237,15 +206,15 @@
                         },
                         success: function(response) {
                             if (response.status === 'success') {
-                                location.reload();
-                                alert(response.message);
+                                showModal(response.message, response.status)
+                                $('#editBarangForm')[0].reset();
                             } else {
-                                alert(response.message);
+                                showModal(response.message, response.status)
                             }
                         },
                         error: function(xhr) {
                             let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menambahkan barang';
-                            alert(errorMessage); // Tampilkan pesan error
+                            showModal(errorMessage, 'fail'); // Tampilkan pesan error
                         }
                     });
                 });
@@ -266,16 +235,46 @@
                             _token: "{{ csrf_token() }}" 
                         },
                         success: function(response) {
-                            alert(response.message); // Tampilkan notifikasi
-                            location.reload();
+                            showModal(response.message, response.status); // Tampilkan notifikasi
                             $('tr[data-slug="'+barangSlug+'"]').remove(); // Hapus baris dari tabel
                         },
                         error: function(xhr) {
                             let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus barang';
-                            alert(errorMessage);
+                            showModal(errorMessage, 'fail');
                         }
                     });
                 });
             });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            function updateTable() {
+                $.ajax({
+                    url: "{{ route('admin.inventori') }}",
+                    method: 'GET', 
+                    success: function(response) {
+                        let tbody = $('#barangTable tbody');
+                        tbody.empty(); // Kosongkan isi tabel sebelum memperbarui
+                        
+                        response.data.forEach(function(barang) {
+                            let row = `
+                                <tr>
+                                    <td>${barang.nama_barang}</td>
+                                    <td>${barang.merk}</td>
+                                    <td>${barang.lokasi_id}</td>
+                                    <td>${barang.stock}</td>
+                                    <td>${barang.tahun_datang}</td>
+                                </tr>
+                            `;
+                            tbody.append(row);
+                        });
+                    },
+                    error: function() {
+                        showModal('Gagal mengambil data barang.', 'fail');
+                    }
+                })
+            }
         </script>        
 </x-app-layout>

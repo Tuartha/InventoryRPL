@@ -78,7 +78,7 @@
                         </svg>
                         <h3 class="text-lg font-bold text-black ">Apakah Anda yakin ingin mengembalikan barang ini?</h3>
                         <div class="flex justify-center pt-5">
-                            <button id="btn-confirm" data-modal-hide="popup-modal" type="button" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-7 py-2.5 text-center">
+                            <button id="btn-kembalikan" data-modal-hide="popup-modal" type="button" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-7 py-2.5 text-center">
                                 Kembalikan
                             </button>
                             <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-7 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Batal</button>
@@ -97,12 +97,12 @@
                         modal.classList.remove("hidden");
                         
                         // Set the confirmation button to use this ID for the fetch request
-                        document.getElementById("btn-confirm").setAttribute("data-id", peminjamanId);
+                        document.getElementById("btn-kembalikan").setAttribute("data-id", peminjamanId);
                     });
                 });
 
                 // Handle tombol "Kembalikan"
-                document.getElementById("btn-confirm").addEventListener("click", function () {
+                document.getElementById("btn-kembalikan").addEventListener("click", function () {
                     const peminjamanId = this.getAttribute("data-id");
                     console.log("ID yang dikirim:", peminjamanId);
 
@@ -111,7 +111,7 @@
                         return;
                     }
 
-                    fetch(`/pengembalian/${peminjamanId}`, {
+                    fetch(`/admin/pengembalian/${peminjamanId}`, {
                         method: "POST",
                         headers: {
                             "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
