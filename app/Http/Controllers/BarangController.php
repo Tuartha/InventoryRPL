@@ -9,9 +9,15 @@ use App\Models\Lokasi;
 
 class BarangController extends Controller
 {
-    public function loadAll() {
-        $all = Barang::all();
+    public function loadAll(Request $request) {
+        $all =  Barang::with('lokasi')->get();
         $lokasis = Lokasi::all();
+        if($request->ajax()) {
+            return response()->json([
+                "data" => $all,
+                "lokasis" => $lokasis
+            ]);
+        }
         return view('/inventori', compact(['all', 'lokasis']));
     }
 

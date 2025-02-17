@@ -3,7 +3,7 @@
         <div class="mt-16 mb-10 ">
             <h1 class="text-3xl font-bold text-white">Data Pengguna yang terdaftar</h1>
         </div>
-        <form class="max-w-full mx-auto">
+        {{-- <form class="max-w-full mx-auto">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -20,10 +20,15 @@
                 <button type="submit"
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
-        </form>
+        </form> --}}
+
+        {{-- <button type="button" data-modal-target="crud-tambahU" data-modal-toggle="crud-tambahU"
+                class="flex items-center justify-center gap-2 md:mx-[3rem] lg:mx-20 text-white bg-[#222831] hover:bg-opacity-85 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
+                <i class="font-bold ph ph-plus"></i> User Baru
+        </button> --}}
 
         <div class="relative z-10 flex justify-center overflow-x-auto top-5">
-            <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
+            <table id="userTable" class="w-full text-sm text-left text-gray-500 rtl:text-right">
 
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -44,9 +49,6 @@
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
                             Tipe
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-
                         </th>
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
@@ -79,20 +81,19 @@
                             </td>
 
                             <td class="px-6 py-4 text-right ">
-                                <a href="#" class="flex items-center font-medium text-blue-600 hover:text-blue-800"
-                                    data-modal-target="crud-edit" data-modal-toggle="crud-edit"
+                                <a href="#" class="updateUserForm flex items-center font-medium text-blue-600 hover:text-blue-800"
+                                    data-modal-target="edit-user" data-modal-toggle="edit-user"
                                     data-id="{{ $user->id }}"
                                     data-name="{{ $user->name }}"
                                     data-email="{{ $user->email }}"
+                                    data-password="{{ $user->password }}"
                                     data-kelas="{{ $user->kelas }}"
                                     data-nis="{{ $user->nis }}"
                                     data-user_type="{{ $user->user_type }}">
                                     <i class="mr-2 text-xl ph ph-pencil-simple "></i>
                                     Edit</a>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="#" class="flex items-center font-medium text-red-600 hover:text-red-800"
-                                    data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                <a href="#" class="hapusUser items-center font-medium text-red-600 hover:text-red-800"
+                                    data-modal-target="popup-modalU" data-modal-toggle="popup-modalU"
                                     data-id="{{ $user->id }}">
                                     <i class="mr-2 text-xl ph ph-trash"></i>Hapus
                                 </a>
@@ -151,4 +152,253 @@
             </ul>
         </nav>
     </div> --}}
+    {{-- @include('profile.partials.user.add_form') --}}
+    @include('profile.partials.user.edit_form')
+    @include('profile.partials.user.delete_user')
+    @include('components.alerts')
+    <script>
+        $(document).ready( function () {
+                // $('#userTable').DataTable({
+                //     "paging": true, // Mengaktifkan fitur pagination
+                //     "searching": true, // Mengaktifkan fitur pencarian
+                //     "ordering": true, // Mengaktifkan fitur sorting
+                //     "info": true, // Menampilkan info jumlah data
+                //     "lengthChange": true, // Menampilkan opsi jumlah data per halaman
+                //     "columnDefs": [
+                //         {
+                //             "targets": -1, // Menargetkan kolom terakhir (Aksi)
+                //             "orderable": false // Menonaktifkan fitur sorting di kolom Aksi
+                //         }
+                //     ],
+                //     "language": {
+                //         "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                //         "zeroRecords": "Data tidak ditemukan",
+                //         "info": "Menampilkan _START_ hingga _END_ dari _TOTAL_ data",
+                //         "infoEmpty": "Tidak ada data yang tersedia",
+                //         "infoFiltered": "(disaring dari _MAX_ total data)",
+                //         "search": "Cari:",
+                //     }
+                // });
+        
+                // $(document).on('submit', '#addUserForm', function(e) {
+                //     e.preventDefault();
+                //     let name = $('#name').val();
+                //     let email = $('#email').val();
+                //     let kelas = $('#kelas').val();
+                //     let password = $('#password').val();
+                //     let nis = $('#nis').val();
+                //     let user_type = $('#user_type').val();
+
+                //     console.log(nis);
+        
+                //     $.ajax({
+                //         url: "{{ route('addUser') }}",
+                //         method: 'post',
+                //         data: {
+                //             name: name,
+                //             email: email,
+                //             kelas: kelas,
+                //             password: password,
+                //             nis: nis,
+                //             user_type: user_type,
+                //             _token: "{{ csrf_token() }}" // Jangan lupa menambahkan CSRF token
+                //         },
+                //         success: function(response) {
+                //             if (response.status === 'success') {
+                //                 showModal(response.message, response.status)
+                //                 $('#addUserForm')[0].reset();
+                //                 updateTable();
+                //             } else {
+                //                 showModal(response.message, response.status)
+                //             }
+                //         },
+                //         error: function(xhr) {
+                //             let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menambahkan user';
+                //             showModal(errorMessage, 'fail')
+                //         }
+                //     });
+                // });
+
+                $(document).on('click', '.updateUserForm', function() {
+                    let id = $(this).data('id');
+                    let name = $(this).data('name');
+                    let email = $(this).data('email');
+                    let kelas = $(this).data('kelas');
+                    let password = $(this).data('password');
+                    let nis = $(this).data('nis');
+                    let user_type = $(this).data('user_type');
+
+                    console.log('ID:', $(this).data('id'));
+                    console.log('Nama:', $(this).data('name'));
+                    console.log('Email:', $(this).data('email'));
+                    console.log('Kelas:', $(this).data('kelas'));
+                    console.log('Password:', $(this).data('password'));
+                    console.log('NIS:', $(this).data('nis'));
+                    console.log('Tipe User:', $(this).data('user_type'));
+
+                    $('#up_id').val(id);
+                    $('#up_name').val(name);
+                    $('#up_email').val(email);
+                    $('#up_kelas').val(kelas);
+                    $('#up_password').val(password);
+                    $('#up_nis').val(nis);
+                    $('#up_user_type').val(user_type);
+                });
+
+                $(document).on('click', '.updateUser', function(e) {
+                    e.preventDefault();
+                    let up_id = $('#up_id').val();
+                    let up_name = $('#up_name').val();
+                    let up_email = $('#up_email').val();
+                    let up_kelas = $('#up_kelas').val();
+                    let up_password = $('#up_password').val();
+                    let up_nis = $('#up_nis').val();
+                    let up_user_type = $('#up_user_type').val();
+                    
+                    $.ajax({
+                        url: "{{ route('editUser') }}",
+                        method: 'POST',
+                        data: {
+                            up_id: up_id,
+                            up_name: up_name,
+                            up_email: up_email,
+                            up_kelas: up_kelas,
+                            up_password: up_password,
+                            up_nis: up_nis,
+                            up_user_type: up_user_type,
+                            _token: "{{ csrf_token() }}" 
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                showModal(response.message, response.status)
+                                $('#editUserForm')[0].reset();
+                                updateTable();
+                            } else {
+                                showModal(response.message, response.status)
+                            }
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat mengubah user';
+                            showModal(errorMessage, 'fail'); // Tampilkan pesan error
+                        }
+                    });
+                });
+
+                let id; // Variabel untuk menyimpan slug barang
+                $(document).on('click', '.hapusUser', function(e) {
+                    e.preventDefault();
+                    id = $(this).data('id'); // Ambil slug dari tombol yang diklik
+                });
+
+                // // Saat tombol "Hapus" di modal diklik, lakukan AJAX request
+                $('.hapusBtnU').on('click', function() {
+                    $.ajax({
+                        url: "{{ route('deleteUser') }}",
+                        method: "POST",
+                        data: {
+                            id: id,
+                            _token: "{{ csrf_token() }}" 
+                        },
+                        success: function(response) {
+                            showModal(response.message, response.status); // Tampilkan notifikasi
+                            $('tr[data-id="'+id+'"]').remove(); // Hapus baris dari tabel
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus user';
+                            showModal(errorMessage, 'fail');
+                        }
+                    });
+                });
+            });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            function updateTable() {
+                $.ajax({
+                    url: "{{ route('user') }}",
+                    method: 'GET',
+                    success: function(response) {
+                        let tbody = $('#userTable tbody');
+                        tbody.empty(); // Kosongkan isi tabel sebelum memperbarui
+
+                        response.data.forEach(function(user, index) {
+                            let row = `
+                                <tr>
+                                    <td scope="row"
+                                        class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap">
+                                        ${index + 1}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        ${user.name}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        ${user.email}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        ${user.kelas}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        ${user.nis}
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        ${user.user_type}
+                                    </td>
+                                    <td class="px-6 py-4 text-right ">
+                                        <a href="#" class="flex items-center font-medium text-blue-600 hover:text-blue-800"
+                                            data-modal-target="edit-user" data-modal-toggle="edit-user"
+                                            data-id="${user.id}"
+                                            data-name="${user.name}"
+                                            data-email="${user.email}"
+                                            data-password="${user.password}"
+                                            data-kelas="${user.kelas}"
+                                            data-nis="${user.nis}"
+                                            data-user_type="${user.user_type}">
+                                            <i class="mr-2 text-xl ph ph-pencil-simple "></i>
+                                            Edit</a>
+                                        <a href="#" class="flex items-center font-medium text-red-600 hover:text-red-800"
+                                            data-modal-target="popup-modalU" data-modal-toggle="popup-modalU"
+                                            data-id="${user.id}">
+                                            <i class="mr-2 text-xl ph ph-trash"></i>Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                            tbody.append(row);
+                        });
+                    },
+                    error: function() {
+                        showModal('Gagal mengambil data user.', 'fail');
+                    }
+                });
+            }
+
+            // Fungsi untuk memasang event listener pada modal
+            // function attachModalListeners(e) {
+            //     // Event listener untuk modal edit
+            //     e.preventDefault
+            //     $(document).on('click', '.updateBarangForm', function() {
+            //         let slug = $(this).data('slug');
+            //         let nama_barang = $(this).data('nama_barang');
+            //         let merk = $(this).data('merk');
+            //         let lokasi = $(this).data('lokasi');
+            //         let tahun_datang = $(this).data('tahun_datang');
+            //         let stock = $(this).data('stock');
+
+            //         $('#up_slug').val(slug);
+            //         $('#up_nama_barang').val(nama_barang);
+            //         $('#up_merk').val(merk);
+            //         $('#up_lokasi_id').val(lokasi);
+            //         $('#up_tahun_datang').val(tahun_datang);
+            //         $('#up_stock').val(stock);
+            //     });
+
+            //     // Event listener untuk modal hapus
+            //     $(document).on('click', '.hapusBarang', function(e) {
+            //         e.preventDefault();
+            //         id = $(this).data('slug'); // Ambil slug dari tombol yang diklik
+            //     });
+            // }
+    </script>
 </x-app-layout>
