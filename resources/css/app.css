@@ -7,6 +7,14 @@ div.dt-container select.dt-input {
     padding: 4px 20px 4px 10px !important;
 }
 
+#barangTable tbody tr td:last-child {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+}
+
 /* Sidebar Mode Default (Desktop) */
 .sidebar-menu {
     position: fixed;
@@ -27,6 +35,10 @@ div.dt-container select.dt-input {
 @media screen and (max-width: 640px) {
     .sidebar-menu {
         transform: translateX(-100%);
+    }
+
+    #barangTable tbody tr td:last-child {
+        gap: 3rem;
     }
 
     .listBtn {

@@ -42,29 +42,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b hover:bg-gray-100">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap">
-                            1
-                        </th>
-                        <td class="px-6 py-4 text-center">
-                            Pintol Gaming
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            pintolgaming067@gmail.com
-                        </td>
-                        <td class="px-6 py-4 text-center ">
-                            <a href="#" class="font-medium hover:text-green-600 data-modal-target=" popup-modal"
-                            data-modal-toggle="popup-modal"><i
-                                    class="text-3xl ph ph-seal-check "></i></a>
-                        </td>
-                    </tr>
+                    @foreach ($userVerif as $user)
+                        <tr class="bg-white border-b hover:bg-gray-100">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap">
+                                {{ $loop->iteration }}
+                            </th>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->name }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                {{ $user->email }}
+                            </td>
+                            <td class="px-6 py-4 text-center ">
+                                <a href="#" class="font-medium hover:text-green-600 verifikasiU" data-modal-target="verifUser"
+                                    data-modal-toggle="verifUser"
+                                    data-id="{{ $user->id }}">
+                                    <i class="text-3xl ph ph-seal-check"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="relative flex justify-center mt-10">
+    {{-- <div class="relative flex justify-center mt-10">
         <nav aria-label="Page navigation example">
             <ul class="flex items-center h-10 -space-x-px text-base">
                 <li>
@@ -111,15 +114,16 @@
                 </li>
             </ul>
         </nav>
-    </div> 
+    </div>  --}}
+    @include('components.alerts')
 
-    <div id="popup-modal" tabindex="-1"
+    <div id="verifUser" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-md max-h-full p-4">
             <div class="relative bg-white rounded-lg shadow ">
                 <button type="button"
                     class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                    data-modal-hide="popup-modal">
+                    data-modal-hide="verifUser">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -136,16 +140,56 @@
                     <h3 class="text-lg font-bold text-black ">Apakah yakin ingin verifikasi akun ini?</h3>
                     <p class="text-[14px] text-black/80 text-center flex justify-center pt-1"></p>Verifikasi akun ini</p>
                     <div class="flex justify-center pt-5">
-                        <button data-modal-hide="popup-modal" type="button"
-                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-7 py-2.5 text-center">
+                        <button data-modal-hide="verifUser" type="button"
+                            class="verifikasi text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-7 py-2.5 text-center"
+                            data-modal-target="messageModal"
+                            data-modal-toggle="messageModal">
                             Verifikasi
                         </button>
-                        <button data-modal-hide="popup-modal" type="button"
-                            class="py-2.5 px-7 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 ">Batal</button>
+                        <button data-modal-hide="verifUser" type="button"
+                            class="py-2.5 px-7 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+                            data-modal-target="messageModal"
+                            data-modal-toggle="messageModal">Batal</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            let id; // Variabel untuk menyimpan slug barang
+            $(document).on('click', '.verifikasiU', function(e) {
+                e.preventDefault();
+                id = $(this).data('id'); // Ambil slug dari tombol yang diklik
+            });
+            $('.verifikasi').on('click', function(e) {
+                e.preventDefault();
+                console.log(id);
+
+                $.ajax({
+                    url: "{{ route('verif') }}",
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        showModal(response.message, response.status); // Tampilkan notifikasi
+                        // location.reload();
+                    },
+                    error: function(xhr) {
+                        let errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus user';
+                        showModal(errorMessage, 'fail');
+                    }
+                });
+            });
+        });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 </x-app-layout>

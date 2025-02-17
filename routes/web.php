@@ -43,7 +43,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/inventori/update', [BarangController::class, 'editForm'])->name('editBarang');
     Route::post('/inventori/delete', [BarangController::class, 'deleteBarang'])->name('deleteBarang');
     Route::get('/allUser', [UserController::class, 'allUser'])->name('user');
-    Route::get('/verifUser', [UserController::class, 'verifUser'])->name('verifUser');
+    Route::post('/allUser/add', [UserController::class, 'addUser'])->name('addUser');
+    Route::post('/allUser/update', [UserController::class, 'updateUser'])->name('editUser');
+    Route::post('/allUser/delete', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('/verifUser', [UserController::class, 'noVerifUser'])->name('verifUser');
+    Route::post('/verifUser/verif', [UserController::class, 'verifUser'])->name('verif');
 });
 
 // Route untuk user
